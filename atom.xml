@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1489368019.github.io</id>
     <title>Gridea</title>
-    <updated>2021-03-12T02:16:42.556Z</updated>
+    <updated>2021-03-12T06:56:59.277Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1489368019.github.io"/>
     <link rel="self" href="https://1489368019.github.io/atom.xml"/>
@@ -10,6 +10,24 @@
     <logo>https://1489368019.github.io/images/avatar.png</logo>
     <icon>https://1489368019.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Java继承]]></title>
+        <id>https://1489368019.github.io/post/java-ji-cheng/</id>
+        <link href="https://1489368019.github.io/post/java-ji-cheng/">
+        </link>
+        <updated>2021-03-12T02:58:22.000Z</updated>
+        <content type="html"><![CDATA[<p>1、父类的private修饰的数据与和方法不被子类继承，构造方法也不被子类继承。<br>
+2、子类不是父类的一个子集，子类通常比父类包含更多的信息和方法。<br>
+3、父类和子类应该满足“是一种”关系（is-a），例：圆形是一种几何图形。但不是所有的“是一种”关系（is-a）都该用继承来建模，例：正方形是一种矩形。<br>
+4、子类只允许有一个父类。<br>
+5、子类的构造函数会默认将super（）作为第一条语句。<br>
+6、如果父类只有有参函数，子类的构造函数要传入父类的参数。super（参数）<br>
+7、私有方法和静态方法不能被覆盖，即方法重写。<br>
+8、方法重写具有相同的签名（方法名和参数列表）和返回值类型。<br>
+9、可以用@Override来标记方法重写。<br>
+10、方法重载可以重载同一个类中的方法，也可以重载继承父类的方法。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://1489368019.github.io/post/hello-gridea/</id>
