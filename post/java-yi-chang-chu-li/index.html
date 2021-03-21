@@ -2,18 +2,17 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Java继承 | Gridea</title>
+<title>Java异常处理 | Gridea</title>
 <link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1616295417613">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Java继承 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Java异常处理 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="1、父类的private修饰的数据与和方法不被子类继承，构造方法也不被子类继承。
-2、子类不是父类的一个子集，子类通常比父类包含更多的信息和方法。
-3、父类和子类应该满足“是一种”关系（is-a），例：圆形是一种几何图形。但不是所有的“是一..." />
+    <meta name="description" content="1、异常的根类是Throwable，免检异常反应程序设计上的不可恢复的逻辑错误，包括Error、RuntimeException。必检异常强制检查并通过try-catch块处理或在方法头声明。
+2、如果方法没有在父类声明异常，就不能在子类中..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -76,11 +75,11 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Java继承
+              Java异常处理
             </h2>
             <div class="post-info">
               <span>
-                2021-03-12
+                2021-03-15
               </span>
               <span>
                 1 min read
@@ -90,16 +89,9 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>1、父类的private修饰的数据与和方法不被子类继承，构造方法也不被子类继承。<br>
-2、子类不是父类的一个子集，子类通常比父类包含更多的信息和方法。<br>
-3、父类和子类应该满足“是一种”关系（is-a），例：圆形是一种几何图形。但不是所有的“是一种”关系（is-a）都该用继承来建模，例：正方形是一种矩形。<br>
-4、子类只允许有一个父类。<br>
-5、子类的构造函数会默认将super（）作为第一条语句。<br>
-6、如果父类只有有参函数，子类的构造函数要传入父类的参数。super（参数）<br>
-7、私有方法和静态方法不能被覆盖，即方法重写。<br>
-8、方法重写具有相同的签名（方法名和参数列表）和返回值类型。<br>
-9、可以用@Override来标记方法重写。<br>
-10、方法重载可以重载同一个类中的方法，也可以重载继承父类的方法。</p>
+                <p>1、异常的根类是Throwable，免检异常反应程序设计上的不可恢复的逻辑错误，包括Error、RuntimeException。必检异常强制检查并通过try-catch块处理或在方法头声明。<br>
+2、如果方法没有在父类声明异常，就不能在子类中声明异常。<br>
+3、</p>
 
               </div>
               <div class="toc-container">
@@ -112,9 +104,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://1489368019.github.io/post/hello-gridea/">
+            <a href="https://1489368019.github.io/post/java-chou-xiang-lei-he-jie-kou/">
               <h3 class="post-title">
-                Hello Gridea
+                Java抽象类和接口
               </h3>
             </a>
           </div>
