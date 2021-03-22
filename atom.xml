@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://1489368019.github.io</id>
+    <id>http://localhost:4000</id>
     <title>Gridea</title>
-    <updated>2021-03-21T02:57:34.075Z</updated>
+    <updated>2021-03-22T12:13:18.843Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://1489368019.github.io"/>
-    <link rel="self" href="https://1489368019.github.io/atom.xml"/>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
     <subtitle>上善若水</subtitle>
-    <logo>https://1489368019.github.io/images/avatar.png</logo>
-    <icon>https://1489368019.github.io/favicon.ico</icon>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
         <title type="html"><![CDATA[多线程]]></title>
-        <id>https://1489368019.github.io/post/duo-xian-cheng/</id>
-        <link href="https://1489368019.github.io/post/duo-xian-cheng/">
+        <id>http://localhost:4000/post/duo-xian-cheng/</id>
+        <link href="http://localhost:4000/post/duo-xian-cheng/">
         </link>
         <updated>2021-03-18T13:12:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="基本概念">基本概念</h1>
@@ -123,13 +123,147 @@ interface ILove {
 }
 </code></pre>
 <h1 id="线程状态">线程状态</h1>
-<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616295260818.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1616295260818.png" alt="" loading="lazy"></figure>
+<ul>
+<li>线程停止
+<ol>
+<li>建议线程正常停止--&gt;利用次数，不建议死循环</li>
+<li>建议使用标志位--&gt;设置一个标志位</li>
+<li>不要使用stop或destroy等过时或者JDK不建议使用的方法</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-java">public class TestStop implements Runnable {
+    //1、设置一个标识位
+    private boolean flag = true;
+
+    @Override
+    public void run() {
+        int i = 0;
+        //2、线程中使用该标识符
+        while (flag) {
+            System.out.println(&quot;run...Thread&quot; + i++);
+        }
+    }
+
+    //3、设置一个公开的方法停止线程，转换标识位
+    public void stop() {
+        this.flag = false;
+    }
+
+    public static void main(String[] args) {
+        TestStop testStop = new TestStop();
+        new Thread(testStop).start();
+        
+        for (int i = 0; i &lt; 200; i++) {
+            System.out.println(&quot;main&quot; + i);
+            if (i == 150) {
+                //调用stop（）方法停止线程
+                testStop.stop();
+                System.out.println(&quot;线程停止了&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>
+<p>线程休眠</p>
+<ol>
+<li>Thread.sleep(时间) 指定当前线程阻塞的毫秒数</li>
+<li>sleep可以模拟网络延时、倒计时等</li>
+<li>每个对象都有一个锁，sleep不会释放锁</li>
+</ol>
+</li>
+<li>
+<p>线程礼让</p>
+<ol>
+<li>Thread.yield（）</li>
+<li>将线程从运行状态转为就绪状态</li>
+<li>CPU重新重新调度，但不一定成功</li>
+</ol>
+</li>
+<li>
+<p>线程强制执行</p>
+<ol>
+<li>join合并线程，将此线程执行完毕后，在执行其他线程，其他线程阻塞</li>
+<li>可以想象成插队</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-java">public class TestJoin implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 1000; i++) {
+            System.out.println(&quot;线程VIP来了&quot; + i);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        //启动我们的线程
+        TestJoin testJoin = new TestJoin();
+        Thread thread = new Thread(testJoin);
+        thread.start();
+
+        //主线程
+        for (int i = 0; i &lt; 500; i++) {
+            if (i == 200)
+                //插队
+                thread.join();
+            System.out.println(&quot;main&quot; + i);
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>守护线程</li>
+</ul>
+<ol>
+<li>线程分为用户线程和守护线程</li>
+<li>虚拟机必须确保用户线程执行完毕</li>
+<li>虚拟机不用等待守护线程执行完毕</li>
+</ol>
+<pre><code class="language-java">public class UnsafeBuyTicket {
+    public static void main(String[] args) {
+        BuyTicket station = new BuyTicket();
+        new Thread(station, &quot;邓憨憨&quot;).start();
+        new Thread(station, &quot;夜十七&quot;).start();
+        new Thread(station, &quot;黄卡丽&quot;).start();
+    }
+}
+
+class BuyTicket implements Runnable {
+    private int tickets = 10;
+    boolean flag = true;//外部停止线程方法
+
+    @Override
+    public void run() {
+        //买票
+        while (flag) {
+            try {
+                buy();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //synchronized 同步方法 锁的是this.tickets
+    private synchronized void buy() throws InterruptedException {
+        if (tickets &lt;= 0) {
+            flag = false;
+            return;
+        }
+        Thread.sleep(100);
+        System.out.println(Thread.currentThread().getName() + &quot;拿到了票&quot; + tickets--);
+    }
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[写法]]></title>
-        <id>https://1489368019.github.io/post/xie-fa/</id>
-        <link href="https://1489368019.github.io/post/xie-fa/">
+        <id>http://localhost:4000/post/xie-fa/</id>
+        <link href="http://localhost:4000/post/xie-fa/">
         </link>
         <updated>2021-03-18T11:17:23.000Z</updated>
         <content type="html"><![CDATA[<h1 id="学习javacsript">学习javacsript</h1>
@@ -154,75 +288,9 @@ interface ILove {
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Spring概述]]></title>
-        <id>https://1489368019.github.io/post/spring-gai-shu/</id>
-        <link href="https://1489368019.github.io/post/spring-gai-shu/">
-        </link>
-        <updated>2021-03-18T11:13:03.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="简介">简介</h1>
-<ul>
-<li>创始人Rod Johnson</li>
-<li>Spring是轻量级、开源的JavaEE框架</li>
-<li>可以解决企业应用开发的复杂性</li>
-<li>核心部分：IOC 和 AOP
-<ol>
-<li>IOC：控制反转，把面向对象过程交给Spring管理</li>
-<li>AOP：面向切面，不修改源代码进行功能增强</li>
-</ol>
-</li>
-</ul>
-<h1 id="特点">特点</h1>
-<ul>
-<li>方便解耦，简化开发</li>
-<li>AOP编程支持</li>
-<li>方便程序测试</li>
-<li>方便集成各种优秀框架</li>
-<li>方便进行事务操作</li>
-<li>降低API开发难度</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java异常处理]]></title>
-        <id>https://1489368019.github.io/post/java-yi-chang-chu-li/</id>
-        <link href="https://1489368019.github.io/post/java-yi-chang-chu-li/">
-        </link>
-        <updated>2021-03-15T11:50:09.000Z</updated>
-        <content type="html"><![CDATA[<p>1、异常的根类是Throwable，免检异常反应程序设计上的不可恢复的逻辑错误，包括Error、RuntimeException。必检异常强制检查并通过try-catch块处理或在方法头声明。<br>
-2、如果方法没有在父类声明异常，就不能在子类中声明异常。<br>
-3、</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java抽象类和接口]]></title>
-        <id>https://1489368019.github.io/post/java-chou-xiang-lei-he-jie-kou/</id>
-        <link href="https://1489368019.github.io/post/java-chou-xiang-lei-he-jie-kou/">
-        </link>
-        <updated>2021-03-14T11:36:51.000Z</updated>
-        <content type="html"><![CDATA[<p>1、一个包含抽象方法的类必须被声明为抽象类。修饰符 abstr<br>
-2、抽象类不能使用new创建实例，它的实现由子类提供。<br>
-3、抽象类的构造方法定义为protect，因为它只被子类使用。<br>
-4、子类实现抽象类中的方法，快捷键alt+Enter。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java多态]]></title>
-        <id>https://1489368019.github.io/post/java-duo-tai/</id>
-        <link href="https://1489368019.github.io/post/java-duo-tai/">
-        </link>
-        <updated>2021-03-13T06:33:56.000Z</updated>
-        <content type="html"><![CDATA[<p>1、多态指使用父类对象的地方都可以使用子类的对象。<br>
-2、把父类实例转换为子类变量时，必须使用转换记号（子类名）进行显示转换。<br>
-3、对象调用成员变量由实际类型决定。<br>
-4、protect修饰符可以被被不同包的子类访问。<br>
-5、用final修饰符修饰类，是不能被继承的，修饰方法，不能被重写。<br>
-6、编译看父类，运行看子类。</p>
-]]></content>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Java继承]]></title>
-        <id>https://1489368019.github.io/post/java-ji-cheng/</id>
-        <link href="https://1489368019.github.io/post/java-ji-cheng/">
+        <id>http://localhost:4000/post/java-ji-cheng/</id>
+        <link href="http://localhost:4000/post/java-ji-cheng/">
         </link>
         <updated>2021-03-12T02:58:22.000Z</updated>
         <content type="html"><![CDATA[<p>1、父类的private修饰的数据与和方法不被子类继承，构造方法也不被子类继承。<br>
@@ -239,8 +307,8 @@ interface ILove {
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://1489368019.github.io/post/hello-gridea/</id>
-        <link href="https://1489368019.github.io/post/hello-gridea/">
+        <id>http://localhost:4000/post/hello-gridea/</id>
+        <link href="http://localhost:4000/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>

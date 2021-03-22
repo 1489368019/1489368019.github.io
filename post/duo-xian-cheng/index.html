@@ -3,10 +3,10 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>多线程 | Gridea</title>
-<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1616295417613">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1616415195787">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="多线程 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="多线程 | Gridea - Atom Feed" href="http://localhost:4000/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
@@ -26,8 +26,8 @@
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="https://1489368019.github.io">
-  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1616295417613" alt="">
+  <a href="http://localhost:4000">
+  <img class="avatar" src="http://localhost:4000/images/avatar.png?v=1616415195787" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -87,7 +87,7 @@
                 2021-03-18
               </span>
               <span>
-                3 min read
+                6 min read
               </span>
               
             </div>
@@ -201,7 +201,141 @@ interface ILove {
 }
 </code></pre>
 <h1 id="线程状态">线程状态</h1>
-<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616295260818.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1616295260818.png" alt="" loading="lazy"></figure>
+<ul>
+<li>线程停止
+<ol>
+<li>建议线程正常停止--&gt;利用次数，不建议死循环</li>
+<li>建议使用标志位--&gt;设置一个标志位</li>
+<li>不要使用stop或destroy等过时或者JDK不建议使用的方法</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-java">public class TestStop implements Runnable {
+    //1、设置一个标识位
+    private boolean flag = true;
+
+    @Override
+    public void run() {
+        int i = 0;
+        //2、线程中使用该标识符
+        while (flag) {
+            System.out.println(&quot;run...Thread&quot; + i++);
+        }
+    }
+
+    //3、设置一个公开的方法停止线程，转换标识位
+    public void stop() {
+        this.flag = false;
+    }
+
+    public static void main(String[] args) {
+        TestStop testStop = new TestStop();
+        new Thread(testStop).start();
+        
+        for (int i = 0; i &lt; 200; i++) {
+            System.out.println(&quot;main&quot; + i);
+            if (i == 150) {
+                //调用stop（）方法停止线程
+                testStop.stop();
+                System.out.println(&quot;线程停止了&quot;);
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>
+<p>线程休眠</p>
+<ol>
+<li>Thread.sleep(时间) 指定当前线程阻塞的毫秒数</li>
+<li>sleep可以模拟网络延时、倒计时等</li>
+<li>每个对象都有一个锁，sleep不会释放锁</li>
+</ol>
+</li>
+<li>
+<p>线程礼让</p>
+<ol>
+<li>Thread.yield（）</li>
+<li>将线程从运行状态转为就绪状态</li>
+<li>CPU重新重新调度，但不一定成功</li>
+</ol>
+</li>
+<li>
+<p>线程强制执行</p>
+<ol>
+<li>join合并线程，将此线程执行完毕后，在执行其他线程，其他线程阻塞</li>
+<li>可以想象成插队</li>
+</ol>
+</li>
+</ul>
+<pre><code class="language-java">public class TestJoin implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 1000; i++) {
+            System.out.println(&quot;线程VIP来了&quot; + i);
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        //启动我们的线程
+        TestJoin testJoin = new TestJoin();
+        Thread thread = new Thread(testJoin);
+        thread.start();
+
+        //主线程
+        for (int i = 0; i &lt; 500; i++) {
+            if (i == 200)
+                //插队
+                thread.join();
+            System.out.println(&quot;main&quot; + i);
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>守护线程</li>
+</ul>
+<ol>
+<li>线程分为用户线程和守护线程</li>
+<li>虚拟机必须确保用户线程执行完毕</li>
+<li>虚拟机不用等待守护线程执行完毕</li>
+</ol>
+<pre><code class="language-java">public class UnsafeBuyTicket {
+    public static void main(String[] args) {
+        BuyTicket station = new BuyTicket();
+        new Thread(station, &quot;邓憨憨&quot;).start();
+        new Thread(station, &quot;夜十七&quot;).start();
+        new Thread(station, &quot;黄卡丽&quot;).start();
+    }
+}
+
+class BuyTicket implements Runnable {
+    private int tickets = 10;
+    boolean flag = true;//外部停止线程方法
+
+    @Override
+    public void run() {
+        //买票
+        while (flag) {
+            try {
+                buy();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //synchronized 同步方法 锁的是this.tickets
+    private synchronized void buy() throws InterruptedException {
+        if (tickets &lt;= 0) {
+            flag = false;
+            return;
+        }
+        Thread.sleep(100);
+        System.out.println(Thread.currentThread().getName() + &quot;拿到了票&quot; + tickets--);
+    }
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -221,7 +355,7 @@ interface ILove {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://1489368019.github.io/post/xie-fa/">
+            <a href="http://localhost:4000/post/xie-fa/">
               <h3 class="post-title">
                 写法
               </h3>
@@ -233,7 +367,7 @@ interface ILove {
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://1489368019.github.io/atom.xml" target="_blank">
+  <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>
