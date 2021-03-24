@@ -3,10 +3,10 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>多线程 | Gridea</title>
-<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1616415195787">
+<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1616592139189">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="多线程 | Gridea - Atom Feed" href="http://localhost:4000/atom.xml">
+<link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="多线程 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
@@ -26,8 +26,8 @@
     <div class="main">
       <div class="main-content">
         <div class="site-header">
-  <a href="http://localhost:4000">
-  <img class="avatar" src="http://localhost:4000/images/avatar.png?v=1616415195787" alt="">
+  <a href="https://1489368019.github.io">
+  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1616592139189" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -87,7 +87,7 @@
                 2021-03-18
               </span>
               <span>
-                6 min read
+                10 min read
               </span>
               
             </div>
@@ -201,19 +201,20 @@ interface ILove {
 }
 </code></pre>
 <h1 id="线程状态">线程状态</h1>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1616295260818.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616295260818.png" alt="" loading="lazy"></figure>
 <ul>
 <li>线程停止
 <ol>
 <li>建议线程正常停止--&gt;利用次数，不建议死循环</li>
 <li>建议使用标志位--&gt;设置一个标志位</li>
 <li>不要使用stop或destroy等过时或者JDK不建议使用的方法</li>
+<li>线程间共享变量需要使用volatile关键字标记，确保每个线程都能读取到更新后的变量值</li>
 </ol>
 </li>
 </ul>
 <pre><code class="language-java">public class TestStop implements Runnable {
     //1、设置一个标识位
-    private boolean flag = true;
+    private volatile boolean flag = true;
 
     @Override
     public void run() {
@@ -301,6 +302,49 @@ interface ILove {
 <li>虚拟机必须确保用户线程执行完毕</li>
 <li>虚拟机不用等待守护线程执行完毕</li>
 </ol>
+<pre><code class="language-java">public class TestDaemon {
+    public static void main(String[] args) {
+        You you = new You();
+        God god = new God();
+        Thread thread = new Thread(god);
+        //默认false是用户线程，设置true为守护线程
+        thread.setDaemon(true);
+        thread.start();
+        new Thread(you).start();
+    }
+}
+class You implements Runnable{
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 3000; i++) {
+            System.out.println(&quot;开心活着&quot;);
+        }
+        System.out.println(&quot;Game over！&quot;);
+    }
+}
+class God implements Runnable{
+
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println(&quot;上帝保佑你！&quot;);
+        }
+    }
+}
+</code></pre>
+<h1 id="同步线程">同步线程</h1>
+<ul>
+<li>并发：同一个对象被多个线程同时操作，可能会引起资源冲突</li>
+<li>线程同步是一种等待机制，多个需要同时访问一个对象的线程进入这个对象的等待池，形成队列，等待前面线程访问完毕，下一个线程再使用</li>
+<li>锁：synchronized关键字对一个对象进行加锁,当一个线程获得对象的锁，独占资源，其他线程需等待</li>
+<li>使用锁会使性能降低，所以方法里需要修改的内容才需要锁</li>
+<li>使用锁的方法
+<ol>
+<li>同步方法</li>
+</ol>
+</li>
+</ul>
 <pre><code class="language-java">public class UnsafeBuyTicket {
     public static void main(String[] args) {
         BuyTicket station = new BuyTicket();
@@ -336,6 +380,196 @@ class BuyTicket implements Runnable {
     }
 }
 </code></pre>
+<pre><code> 2. 同步块
+</code></pre>
+<pre><code class="language-java">public class UnsafeBank {
+    public static void main(String[] args) {
+        Account account = new Account(100,&quot;结婚基金&quot;);
+        Drawing you = new Drawing(account,50,&quot;you&quot;);
+        Drawing me = new Drawing(account,100,&quot;me&quot;);
+        you.start();
+        me.start();
+    }
+}
+//账户类
+class Account {
+    int money;
+    String name;
+
+    public Account(int money, String name) {
+        this.money = money;
+        this.name = name;
+    }
+}
+//取钱类
+class Drawing extends Thread {
+    Account account;
+    int drawingMoney;//取出多少钱
+    int nowMoney;    //手中的钱
+
+    public Drawing(Account account, int drawingMoney, String name) {
+        super(name);
+        this.account = account;
+        this.drawingMoney = drawingMoney;
+    }
+
+    @Override
+    public void run() {
+        //同步方法块，默认锁this
+        synchronized (account) {
+            if (account.money - drawingMoney &lt; 0) {
+                System.out.println(&quot;账户余额不足&quot;);
+                return;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            account.money -= drawingMoney;
+            nowMoney += drawingMoney;
+            System.out.println(this.getName() + &quot;手里的钱&quot; + nowMoney);
+            System.out.println(account.name + &quot;账户余额：&quot; + account.money);
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>死锁<br>
+多个线程各自占有一些共享资源，并且互相等待其他线程占有的资源才能运行，而导致两个或多个线程都在等待对方资源，都停止执行的情形。即某一个同步块同时拥有“两个以上对象的锁”时。</li>
+</ul>
+<pre><code class="language-java">public class DeadLock {
+    public static void main(String[] args) {
+        MakeUp m1 = new MakeUp(0, &quot;邓憨憨&quot;);
+        MakeUp m2 = new MakeUp(1, &quot;黄卡丽&quot;);
+        m1.start();
+        m2.start();
+    }
+}
+
+//口红
+class Lipstick {
+}
+
+//镜子
+class Mirror {
+}
+
+class MakeUp extends Thread {
+    static Lipstick lipstick = new Lipstick();
+    static Mirror mirror = new Mirror();
+    int choice;
+    String name;
+
+    MakeUp(int choice, String name) {
+        this.choice = choice;
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        try {
+            makeup();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void makeup() throws InterruptedException {
+        if (choice == 0) {
+            synchronized (lipstick) {
+                System.out.println(name + &quot;获得口红的锁&quot;);
+                Thread.sleep(1000);
+                synchronized (mirror) {
+                    System.out.println(name + &quot;获得镜子的锁&quot;);
+                }
+            }
+
+        } else {
+            synchronized (mirror) {
+                System.out.println(name + &quot;获得镜子的锁&quot;);
+                Thread.sleep(2000);
+                synchronized (lipstick) {
+                    System.out.println(name + &quot;获得口红的锁&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>lock锁：是显式锁</li>
+</ul>
+<pre><code class="language-java">public class TestLock {
+    public static void main(String[] args) {
+        BuyTickets station = new BuyTickets();
+        new Thread(station, &quot;邓憨憨&quot;).start();
+        new Thread(station, &quot;夜十七&quot;).start();
+        new Thread(station, &quot;黄卡丽&quot;).start();
+    }
+}
+
+class BuyTickets implements Runnable {
+    private int tickets = 10;
+    boolean flag = true;//外部停止线程方法
+    //定义锁
+    private final ReentrantLock lock = new ReentrantLock();
+    @Override
+    public void run() {
+        //买票
+        while (flag) {
+            try {
+                //加锁
+                lock.lock();
+                buy();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                //解锁
+                lock.unlock();
+            }
+        }
+    }
+
+    private void buy() throws InterruptedException {
+        if (tickets &lt;= 0) {
+            flag = false;
+            return;
+        }
+        Thread.sleep(100);
+        System.out.println(Thread.currentThread().getName() + &quot;拿到了票&quot; + tickets--);
+    }
+}
+</code></pre>
+<h1 id="线程池">线程池</h1>
+<ul>
+<li>线程池内部维护一组线程，可以高效执行大量小任务</li>
+<li>Executors提供了静态方法创建不同类型的ExecutorService</li>
+<li>必须调用shutdown()关闭ExecutorService</li>
+</ul>
+<pre><code class="language-java">import java.util.concurrent.*;
+
+public class TestPool {
+    public static void main(String[] args) {
+        //创建服务，创建线程池
+        ExecutorService service = Executors.newFixedThreadPool(4);
+
+        //执行
+        for (int i = 0; i &lt; 6; i++) {
+            service.submit(new MyThreads());
+        }
+        //关闭链接
+        service.shutdown();
+    }
+}
+
+class MyThreads implements Runnable{
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -345,6 +579,8 @@ class BuyTicket implements Runnable {
 <li><a href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F">静态代理模式</a></li>
 <li><a href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F">Lambda表达式</a></li>
 <li><a href="#%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81">线程状态</a></li>
+<li><a href="#%E5%90%8C%E6%AD%A5%E7%BA%BF%E7%A8%8B">同步线程</a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0">线程池</a></li>
 </ul>
 
               </div>
@@ -355,7 +591,7 @@ class BuyTicket implements Runnable {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="http://localhost:4000/post/xie-fa/">
+            <a href="https://1489368019.github.io/post/xie-fa/">
               <h3 class="post-title">
                 写法
               </h3>
@@ -367,7 +603,7 @@ class BuyTicket implements Runnable {
 
         <div class="site-footer">
   Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">
+  <a class="rss" href="https://1489368019.github.io/atom.xml" target="_blank">
     <i class="ri-rss-line"></i> RSS
   </a>
 </div>

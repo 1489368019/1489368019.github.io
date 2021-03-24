@@ -1,19 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://1489368019.github.io</id>
     <title>Gridea</title>
-    <updated>2021-03-22T12:13:18.843Z</updated>
+    <updated>2021-03-24T13:22:40.307Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
+    <link rel="alternate" href="https://1489368019.github.io"/>
+    <link rel="self" href="https://1489368019.github.io/atom.xml"/>
     <subtitle>上善若水</subtitle>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <logo>https://1489368019.github.io/images/avatar.png</logo>
+    <icon>https://1489368019.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
+        <title type="html"><![CDATA[网络编程]]></title>
+        <id>https://1489368019.github.io/post/wang-luo-bian-cheng/</id>
+        <link href="https://1489368019.github.io/post/wang-luo-bian-cheng/">
+        </link>
+        <updated>2021-03-24T06:59:51.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="基本知识">基本知识</h1>
+<ul>
+<li>计算机网络：由两台或更多计算机组成的网络</li>
+<li>互联网：连接网络的网络</li>
+<li>TCP/IP协议泛指互联网协议，只有使用TCP/IP协议的计算机才能够联入互联网</li>
+<li>IP地址分为IPv4和IPv6两种，有一个特殊的IP地址，称为本机地址（localhost），总是127.0.0.1</li>
+<li>域名：因为直接记忆IP地址非常困难，所以我们通常使用域名访问某个特定的服务</li>
+<li>网络模型（osi七层模型）<br>
+<img src="https://1489368019.github.io/post-images/1616585359951.png" alt="" loading="lazy"></li>
+</ul>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="基本知识">基本知识</h1>
+<ul>
+<li>计算机网络：由两台或更多计算机组成的网络</li>
+<li>互联网：连接网络的网络</li>
+<li>TCP/IP协议泛指互联网协议，只有使用TCP/IP协议的计算机才能够联入互联网</li>
+<li>IP地址分为IPv4和IPv6两种，有一个特殊的IP地址，称为本机地址（localhost），总是127.0.0.1</li>
+<li>域名：因为直接记忆IP地址非常困难，所以我们通常使用域名访问某个特定的服务</li>
+<li>网络模型（osi七层模型）<br>
+<img src="https://1489368019.github.io/post-images/1616585359951.png" alt="" loading="lazy"></li>
+</ul>
+<!-- more -->
+<h1 id="网络通信的要素">网络通信的要素</h1>
+<ul>
+<li>IP地址 和 端口
+<ol>
+<li>IP地址：计算机的网络接口（通常是网卡）在网络中的唯一标识</li>
+<li>端口：每个应用程序对应一个端口号</li>
+</ol>
+</li>
+<li>网络协议：TCP协议 和 UDP协议
+<ol>
+<li>TCP协议：一种面向连接，可靠传输的协议</li>
+<li>UDP协议：一种无连接，不可靠传输的协议</li>
+</ol>
+</li>
+</ul>
+<!-- more -->
+<h1 id="tcp">TCP</h1>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[多线程]]></title>
-        <id>http://localhost:4000/post/duo-xian-cheng/</id>
-        <link href="http://localhost:4000/post/duo-xian-cheng/">
+        <id>https://1489368019.github.io/post/duo-xian-cheng/</id>
+        <link href="https://1489368019.github.io/post/duo-xian-cheng/">
         </link>
         <updated>2021-03-18T13:12:53.000Z</updated>
         <content type="html"><![CDATA[<h1 id="基本概念">基本概念</h1>
@@ -123,19 +170,20 @@ interface ILove {
 }
 </code></pre>
 <h1 id="线程状态">线程状态</h1>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1616295260818.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616295260818.png" alt="" loading="lazy"></figure>
 <ul>
 <li>线程停止
 <ol>
 <li>建议线程正常停止--&gt;利用次数，不建议死循环</li>
 <li>建议使用标志位--&gt;设置一个标志位</li>
 <li>不要使用stop或destroy等过时或者JDK不建议使用的方法</li>
+<li>线程间共享变量需要使用volatile关键字标记，确保每个线程都能读取到更新后的变量值</li>
 </ol>
 </li>
 </ul>
 <pre><code class="language-java">public class TestStop implements Runnable {
     //1、设置一个标识位
-    private boolean flag = true;
+    private volatile boolean flag = true;
 
     @Override
     public void run() {
@@ -223,6 +271,49 @@ interface ILove {
 <li>虚拟机必须确保用户线程执行完毕</li>
 <li>虚拟机不用等待守护线程执行完毕</li>
 </ol>
+<pre><code class="language-java">public class TestDaemon {
+    public static void main(String[] args) {
+        You you = new You();
+        God god = new God();
+        Thread thread = new Thread(god);
+        //默认false是用户线程，设置true为守护线程
+        thread.setDaemon(true);
+        thread.start();
+        new Thread(you).start();
+    }
+}
+class You implements Runnable{
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 3000; i++) {
+            System.out.println(&quot;开心活着&quot;);
+        }
+        System.out.println(&quot;Game over！&quot;);
+    }
+}
+class God implements Runnable{
+
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println(&quot;上帝保佑你！&quot;);
+        }
+    }
+}
+</code></pre>
+<h1 id="同步线程">同步线程</h1>
+<ul>
+<li>并发：同一个对象被多个线程同时操作，可能会引起资源冲突</li>
+<li>线程同步是一种等待机制，多个需要同时访问一个对象的线程进入这个对象的等待池，形成队列，等待前面线程访问完毕，下一个线程再使用</li>
+<li>锁：synchronized关键字对一个对象进行加锁,当一个线程获得对象的锁，独占资源，其他线程需等待</li>
+<li>使用锁会使性能降低，所以方法里需要修改的内容才需要锁</li>
+<li>使用锁的方法
+<ol>
+<li>同步方法</li>
+</ol>
+</li>
+</ul>
 <pre><code class="language-java">public class UnsafeBuyTicket {
     public static void main(String[] args) {
         BuyTicket station = new BuyTicket();
@@ -258,12 +349,202 @@ class BuyTicket implements Runnable {
     }
 }
 </code></pre>
+<pre><code> 2. 同步块
+</code></pre>
+<pre><code class="language-java">public class UnsafeBank {
+    public static void main(String[] args) {
+        Account account = new Account(100,&quot;结婚基金&quot;);
+        Drawing you = new Drawing(account,50,&quot;you&quot;);
+        Drawing me = new Drawing(account,100,&quot;me&quot;);
+        you.start();
+        me.start();
+    }
+}
+//账户类
+class Account {
+    int money;
+    String name;
+
+    public Account(int money, String name) {
+        this.money = money;
+        this.name = name;
+    }
+}
+//取钱类
+class Drawing extends Thread {
+    Account account;
+    int drawingMoney;//取出多少钱
+    int nowMoney;    //手中的钱
+
+    public Drawing(Account account, int drawingMoney, String name) {
+        super(name);
+        this.account = account;
+        this.drawingMoney = drawingMoney;
+    }
+
+    @Override
+    public void run() {
+        //同步方法块，默认锁this
+        synchronized (account) {
+            if (account.money - drawingMoney &lt; 0) {
+                System.out.println(&quot;账户余额不足&quot;);
+                return;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            account.money -= drawingMoney;
+            nowMoney += drawingMoney;
+            System.out.println(this.getName() + &quot;手里的钱&quot; + nowMoney);
+            System.out.println(account.name + &quot;账户余额：&quot; + account.money);
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>死锁<br>
+多个线程各自占有一些共享资源，并且互相等待其他线程占有的资源才能运行，而导致两个或多个线程都在等待对方资源，都停止执行的情形。即某一个同步块同时拥有“两个以上对象的锁”时。</li>
+</ul>
+<pre><code class="language-java">public class DeadLock {
+    public static void main(String[] args) {
+        MakeUp m1 = new MakeUp(0, &quot;邓憨憨&quot;);
+        MakeUp m2 = new MakeUp(1, &quot;黄卡丽&quot;);
+        m1.start();
+        m2.start();
+    }
+}
+
+//口红
+class Lipstick {
+}
+
+//镜子
+class Mirror {
+}
+
+class MakeUp extends Thread {
+    static Lipstick lipstick = new Lipstick();
+    static Mirror mirror = new Mirror();
+    int choice;
+    String name;
+
+    MakeUp(int choice, String name) {
+        this.choice = choice;
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        try {
+            makeup();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void makeup() throws InterruptedException {
+        if (choice == 0) {
+            synchronized (lipstick) {
+                System.out.println(name + &quot;获得口红的锁&quot;);
+                Thread.sleep(1000);
+                synchronized (mirror) {
+                    System.out.println(name + &quot;获得镜子的锁&quot;);
+                }
+            }
+
+        } else {
+            synchronized (mirror) {
+                System.out.println(name + &quot;获得镜子的锁&quot;);
+                Thread.sleep(2000);
+                synchronized (lipstick) {
+                    System.out.println(name + &quot;获得口红的锁&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>lock锁：是显式锁</li>
+</ul>
+<pre><code class="language-java">public class TestLock {
+    public static void main(String[] args) {
+        BuyTickets station = new BuyTickets();
+        new Thread(station, &quot;邓憨憨&quot;).start();
+        new Thread(station, &quot;夜十七&quot;).start();
+        new Thread(station, &quot;黄卡丽&quot;).start();
+    }
+}
+
+class BuyTickets implements Runnable {
+    private int tickets = 10;
+    boolean flag = true;//外部停止线程方法
+    //定义锁
+    private final ReentrantLock lock = new ReentrantLock();
+    @Override
+    public void run() {
+        //买票
+        while (flag) {
+            try {
+                //加锁
+                lock.lock();
+                buy();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                //解锁
+                lock.unlock();
+            }
+        }
+    }
+
+    private void buy() throws InterruptedException {
+        if (tickets &lt;= 0) {
+            flag = false;
+            return;
+        }
+        Thread.sleep(100);
+        System.out.println(Thread.currentThread().getName() + &quot;拿到了票&quot; + tickets--);
+    }
+}
+</code></pre>
+<h1 id="线程池">线程池</h1>
+<ul>
+<li>线程池内部维护一组线程，可以高效执行大量小任务</li>
+<li>Executors提供了静态方法创建不同类型的ExecutorService</li>
+<li>必须调用shutdown()关闭ExecutorService</li>
+</ul>
+<pre><code class="language-java">import java.util.concurrent.*;
+
+public class TestPool {
+    public static void main(String[] args) {
+        //创建服务，创建线程池
+        ExecutorService service = Executors.newFixedThreadPool(4);
+
+        //执行
+        for (int i = 0; i &lt; 6; i++) {
+            service.submit(new MyThreads());
+        }
+        //关闭链接
+        service.shutdown();
+    }
+}
+
+class MyThreads implements Runnable{
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[写法]]></title>
-        <id>http://localhost:4000/post/xie-fa/</id>
-        <link href="http://localhost:4000/post/xie-fa/">
+        <id>https://1489368019.github.io/post/xie-fa/</id>
+        <link href="https://1489368019.github.io/post/xie-fa/">
         </link>
         <updated>2021-03-18T11:17:23.000Z</updated>
         <content type="html"><![CDATA[<h1 id="学习javacsript">学习javacsript</h1>
@@ -289,8 +570,8 @@ class BuyTicket implements Runnable {
     </entry>
     <entry>
         <title type="html"><![CDATA[Java继承]]></title>
-        <id>http://localhost:4000/post/java-ji-cheng/</id>
-        <link href="http://localhost:4000/post/java-ji-cheng/">
+        <id>https://1489368019.github.io/post/java-ji-cheng/</id>
+        <link href="https://1489368019.github.io/post/java-ji-cheng/">
         </link>
         <updated>2021-03-12T02:58:22.000Z</updated>
         <content type="html"><![CDATA[<p>1、父类的private修饰的数据与和方法不被子类继承，构造方法也不被子类继承。<br>
@@ -307,8 +588,8 @@ class BuyTicket implements Runnable {
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>http://localhost:4000/post/hello-gridea/</id>
-        <link href="http://localhost:4000/post/hello-gridea/">
+        <id>https://1489368019.github.io/post/hello-gridea/</id>
+        <link href="https://1489368019.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
