@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://1489368019.github.io</id>
     <title>Gridea</title>
-    <updated>2021-03-24T13:44:59.933Z</updated>
+    <updated>2021-04-14T09:05:50.764Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://1489368019.github.io"/>
     <link rel="self" href="https://1489368019.github.io/atom.xml"/>
@@ -10,6 +10,1706 @@
     <logo>https://1489368019.github.io/images/avatar.png</logo>
     <icon>https://1489368019.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[JavaScript]]></title>
+        <id>https://1489368019.github.io/post/javascript/</id>
+        <link href="https://1489368019.github.io/post/javascript/">
+        </link>
+        <updated>2021-04-14T09:03:22.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="javascript简介">JavaScript简介</h1>
+<p>是一种具有函数优先的轻量级，解释型或即时编译型的编程语言，也是一门脚本语言</p>
+<p>JavaScript的标准是ECMAScript</p>
+<h1 id="javascript基础">JavaScript基础</h1>
+<h2 id="1-引入javascript">1、引入JavaScript</h2>
+<p><strong>1、内部标签</strong></p>
+<pre><code class="language-html">&lt;script&gt;
+    alert('Hello,World!');
+&lt;/script&gt;
+</code></pre>
+<p>2、<strong>外部标签</strong></p>
+<p>abc.js</p>
+<pre><code class="language-javascript">alert('Hello,World!');
+</code></pre>
+<p>test.html</p>
+<pre><code class="language-html">&lt;script src=&quot;js/abc.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="2-基本语法">2、基本语法</h2>
+<pre><code class="language-html">&lt;!--JavaScript严格区分大小写--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    //1. 定义变量   标量类型 变量名 = 变量值;
+    var num = 65;
+    var name = '夜十七';
+    //2. 条件控制
+    if (num &gt; 60 &amp;&amp; num &lt; 70) {
+        alert(&quot;60~70&quot;);
+    } else if (num &gt; 70 &amp;&amp; num &lt; 80) {
+        alert(&quot;70~80&quot;);
+    } else {
+        alert(&quot;other&quot;);
+    }
+
+    //浏览器调试 Console
+    //console.log(num) 在浏览器的控制台打印变量
+&lt;/script&gt;
+</code></pre>
+<h2 id="3-数据类型">3、数据类型</h2>
+<p>数值、文本、图形、音频、视频。。。</p>
+<p><strong>number</strong></p>
+<p>js不区分小数和整数</p>
+<pre><code class="language-html">123 //整数
+123.4  //浮点数
+1.23e4  //科学计数法
+NaN  //not a number
+Infinity  //表示无限大
+</code></pre>
+<p><strong>字符串</strong></p>
+<pre><code class="language-html">'abc' &quot;abc&quot;
+</code></pre>
+<p><strong>布尔值</strong></p>
+<p>true，false</p>
+<p><strong>逻辑运算</strong></p>
+<pre><code>&amp;&amp;		两个都为真，结果为真
+||		一个为真，结果为真
+！		真即假，假即真
+</code></pre>
+<p><strong>比较运算符</strong></p>
+<pre><code>=  
+==   等于（类型不一样，值一样，也会判断为true）
+===   绝对等于 （类型一样，值一样，结果true）
+</code></pre>
+<p>注意：</p>
+<ul>
+<li>NaN===NaN	结果为false。NaN与所有的数值都不相等</li>
+<li>只能通过isNaN(NaN)来判断是否是NaN</li>
+</ul>
+<p><strong>浮点数问题</strong></p>
+<pre><code>console.log(1/3===1-1/3);
+</code></pre>
+<p>尽量避免使用浮点数进行比较运算，存在精度问题！</p>
+<p><strong>null和undefined</strong></p>
+<ul>
+<li>null	空</li>
+<li>undefined     未定义</li>
+</ul>
+<p><strong>数组</strong></p>
+<p>Java的数值必须是相同类型的对象，而JS不需要这样越界</p>
+<pre><code class="language-html">//尽量使用
+var arr = [1,2,3,&quot;hello&quot;,null,true];
+
+new Array(1,2,3,&quot;hello&quot;,null,true);
+</code></pre>
+<p><strong>对象</strong></p>
+<ul>
+<li>对象是大括号，数组是中括号</li>
+<li>每个属性之间用逗号隔开，最后一个不需要</li>
+</ul>
+<pre><code class="language-javascript">var person = {
+    name: &quot;夜十七&quot;,
+    age: 18,
+    tags: [&quot;JS&quot;,&quot;java&quot;,&quot;web&quot;,&quot;...&quot;]
+}
+</code></pre>
+<p>取对象的值</p>
+<pre><code>person.name
+person.age
+</code></pre>
+<h2 id="4-严格检查模式">4、严格检查模式</h2>
+<pre><code class="language-html">&lt;!--
+'use strict'：严格检查模式
+必须写在JS的第一行
+预防JS的随意性产生的一些问题
+--&gt;
+&lt;script&gt;
+    'use strict'
+    //局部变量建议使用let
+     let i = 1;
+&lt;/script&gt;
+</code></pre>
+<h1 id="数据类型">数据类型</h1>
+<h2 id="1-字符串">1、字符串</h2>
+<p><strong>1、正常字符串使用 单引号 或 双引号包裹</strong></p>
+<p>**2、注意转移字符  \  **</p>
+<p><strong>3、多行字符串编写</strong></p>
+<pre><code class="language-js">//tab 键上 ``
+var msg = `
+hello
+world
+你好
+世界
+`
+</code></pre>
+<p><strong>4、模板字符串</strong></p>
+<pre><code class="language-js">let name = &quot;夜十七&quot;;
+let msg = `你好呀，${name}`;
+</code></pre>
+<p><strong>5、字符串长度</strong></p>
+<p>str.length</p>
+<p><strong>6、字符串的可变性，不可变</strong></p>
+<p><strong>7、常用函数</strong></p>
+<pre><code class="language-js">//大小写转换
+str.toUpperCase()
+str.toLowerCase()
+//获取下标
+str.indexOf('abc')
+//从第二个截取到最后一个
+str.substring(1)
+//[1,3)
+str.substring(1,3)
+
+</code></pre>
+<h2 id="2-数组">2、数组</h2>
+<p>Array可以包含任意的数据类型</p>
+<hr>
+<p><strong>arr.length</strong></p>
+<p>数组长度</p>
+<p>注：可以给arr.length赋值，数组大小就会变化，如果赋值过小，元素就会丢失</p>
+<p><strong>indexOf</strong></p>
+<pre><code>//indexOf,通过元素获得下标索引
+arr.indexOf(2)
+</code></pre>
+<p>字符串的&quot;1&quot;和数字1是不同的</p>
+<p><strong>slice()</strong></p>
+<pre><code class="language-js">//slice() 截取Array的一部分，返回一个新数组
+arr = [1,2,3,4,5,6,7]
+(7) [1, 2, 3, 4, 5, 6, 7]
+arr.slice(2,4)
+(2) [3, 4]
+</code></pre>
+<p><strong>push() 和 pop()</strong></p>
+<p>push：压入尾部</p>
+<p>pop：弹出尾部的一个元素</p>
+<p><strong>unshift() 和 shift()</strong></p>
+<p>unshift：压入头部</p>
+<p>shift：弹出头部的一个元素</p>
+<p><strong>sort()	排序</strong></p>
+<p><strong>reverse()	元素反转</strong></p>
+<p><strong>concat()</strong></p>
+<p>连接数组</p>
+<pre><code>arr.concat(&quot;a&quot;,&quot;b&quot;)
+(9) [1, 2, 3, 4, 5, 6, 7, &quot;a&quot;, &quot;b&quot;]
+arr
+(7) [1, 2, 3, 4, 5, 6, 7]
+</code></pre>
+<p>注：concat()	并没有修改数组，只是会返回一个新的数组</p>
+<p><strong>join()</strong></p>
+<p>打印拼接数组，使用特定的字符串连接</p>
+<pre><code>arr.join(&quot;-&quot;)
+&quot;1-2-3-4-5-6-7&quot;
+</code></pre>
+<p><strong>多维数组</strong></p>
+<pre><code>arr = [[1,2],[3,4],[&quot;a&quot;,&quot;b&quot;]]
+arr[1][1]
+4
+</code></pre>
+<h2 id="3-对象">3、对象</h2>
+<p>JS中所有的键值都是字符串，值可以是任意对象</p>
+<p><strong>1、对象赋值</strong></p>
+<pre><code class="language-js">person.name = &quot;岁少&quot;
+&quot;岁少&quot;
+</code></pre>
+<p><strong>2、动态的删减属性</strong></p>
+<pre><code class="language-js">delete person.name
+true
+</code></pre>
+<p><strong>3、动态的添加</strong></p>
+<p>直接给新的属性添加值即可</p>
+<pre><code class="language-js">person.sex = &quot;男&quot;
+&quot;男&quot;
+</code></pre>
+<p><strong>4、判断属性值是否在这个对象</strong></p>
+<pre><code class="language-js">&quot;age&quot; in person
+true
+//继承的方法
+&quot;toString&quot; in person
+true
+</code></pre>
+<p><strong>5、判断属性是否是对象本身拥有的</strong></p>
+<pre><code class="language-js">person.hasOwnProperty(&quot;age&quot;)
+true
+person.hasOwnProperty(&quot;toString&quot;)
+false
+</code></pre>
+<h2 id="4-流程控制">4、流程控制</h2>
+<p><strong>if判断</strong></p>
+<p><strong>while循环</strong></p>
+<p><strong>for循环</strong></p>
+<p><strong>数组循环</strong></p>
+<ul>
+<li>
+<p>forEach循环</p>
+<pre><code class="language-js">var arr = [1,2,3,4,5,6,7]
+arr.forEach(function (value) {
+  console.log(value);
+})
+</code></pre>
+</li>
+<li>
+<p>forof循环</p>
+<pre><code class="language-js">for (var index of arr) {
+    console.log(index);
+}
+</code></pre>
+</li>
+<li>
+<p>forin循环</p>
+<pre><code class="language-js">//index是数组的索引
+for (var index in arr) {
+    console.log(arr[index]);
+}
+//不推荐使用，增加数组长度后，index会获得值，而不是下标
+</code></pre>
+</li>
+</ul>
+<h2 id="5-map-和-set"><strong>5、Map 和 Set</strong></h2>
+<p>ES6的新特性</p>
+<p><strong>Map</strong></p>
+<pre><code class="language-js">var map = new Map([[&quot;tom&quot;,100],[&quot;jack&quot;,90],[&quot;haha&quot;,80]]);
+var name = map.get(&quot;jack&quot;);
+map.set(&quot;admin&quot;,70);
+map.delete(&quot;tom&quot;);
+</code></pre>
+<p><strong>Set</strong></p>
+<p>无序不重复的集合</p>
+<pre><code class="language-js">var set = new Set([1,2,2,3]);//Set可以去重
+Set(3) {1, 2, 3}
+set.add(1);   //添加
+set.delete(2); //删除
+</code></pre>
+<p><strong>可以使用forof循环遍历Map和Set</strong></p>
+<pre><code class="language-js">//遍历Map
+for (var index of map) {
+    console.log(index);
+}
+//遍历Set
+for (var index of map) {
+    console.log(index);
+}
+</code></pre>
+<h1 id="函数">函数</h1>
+<h2 id="1-定义函数">1、定义函数</h2>
+<p><strong>方式一</strong></p>
+<p>绝对值函数</p>
+<pre><code class="language-js">function abs(x) {
+    if (x &gt;= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+}
+</code></pre>
+<p>一旦执行到return代表函数结束，返回结果</p>
+<p>如果没有执行return，函数执行完也会返回结果，结果就是undefined。 ---异于Java</p>
+<p><strong>方式二</strong></p>
+<pre><code class="language-js">var abs = function(x) {
+    if (x &gt;= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+}
+</code></pre>
+<p>方式一等价于方式二</p>
+<p><strong>调用函数</strong></p>
+<pre><code class="language-js">abs(-10)
+</code></pre>
+<p>参数问题：JS可以传人一个函数，也可以不传递参数</p>
+<p><strong>存在的问题</strong></p>
+<ul>
+<li>
+<p>假设不存在参数，如何规避</p>
+<pre><code class="language-js">function abs(x) {
+    //手动抛出异常点来判断
+    if(typeof x !== &quot;number&quot;) {
+        throw &quot;Mot a Number&quot;;
+    }
+    if (x &gt;= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>arguments</p>
+<p>是一个免费赠送的关键字</p>
+<p>代表传递进来的所有的参数，是一个数组</p>
+<pre><code class="language-js">function abs(x) {
+    for (var i = 0; i &lt; arguments.length; i++) {
+        console.log(arguments[i]);
+    }
+    if (x &gt;= 0) {
+        return x;
+    } else {
+        return -x;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>rest</p>
+<p>ES6引入的新特性</p>
+<p>获取除了已经定义的参数之外的所有参数</p>
+<pre><code class="language-js">function abs(x, y, ...rest) {
+    console.log(&quot;x-&gt;&quot; + x);
+    console.log(&quot;y-&gt;&quot; + y);
+    console.log(rest);
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="2-变量的作用域">2、变量的作用域</h2>
+<p><strong>在JS中，var定义的变量是有作用域的</strong></p>
+<p>在函数体中声明，则在函数体外不可以使用</p>
+<pre><code class="language-js">function test() {
+    var x = 1;
+    x = x + 1;
+}
+x = 10;//Uncaught ReferenceError: x is not defined
+</code></pre>
+<p><strong>如果两个函数使用了相同的变量名，只要在函数内部，就不冲突</strong></p>
+<pre><code class="language-js">function test1() {
+    var x = 1;
+    x = x + 1;
+}
+function test2() {
+    var x = 1;
+    x = x + 1;
+}
+</code></pre>
+<p><strong>内部函数可以访问外部函数的成员，反之则不行</strong></p>
+<pre><code class="language-js">function test1() {
+    var x = 1;
+    function test2() {
+        var y = x + 1;
+    }
+    var z = y + 1;//Uncaught ReferenceError: y is not defined
+}
+</code></pre>
+<p><strong>内部函数和外部函数的变量重名</strong></p>
+<p>函数查找变量从自身函数开始，由内向外查找</p>
+<pre><code class="language-js">function test1() {
+    var x = 1;
+    function test2() {
+        var x = 'A';
+        console.log(x);
+    }
+    console.log(x);
+    test2();
+}
+
+1
+A
+</code></pre>
+<p><strong>提升变量的作用域</strong></p>
+<p>自动提升y的声明，但不会提升y的赋值</p>
+<p>规范：所有变量的声明都放在函数的头部</p>
+<pre><code class="language-js">function test1() {
+    var x = &quot;x&quot; + y;
+    console.log(x);
+    var y = &quot;y&quot;;
+}
+
+xundefined
+</code></pre>
+<p><strong>全局函数</strong></p>
+<pre><code class="language-js">var x = 100;
+
+function test() {
+    console.log(x);
+}
+</code></pre>
+<p><strong>全局对象 window</strong></p>
+<p>默认所有的全局变量（包括函数），都会自动绑定在window下</p>
+<pre><code class="language-js">var x = 100;
+console.log(x);
+console.log(window.x);
+</code></pre>
+<p>规范：由于所有全局变量都会绑定到我们的window下，如果不同的JS文件使用了相同的</p>
+<p>全局变量，就会发生冲突。所以将自己的代码全部放入自己定义的唯一的空间名字中</p>
+<pre><code class="language-js">var MyWindow = {};
+MyWindow.name = &quot;夜十七&quot;;
+MyWindow.add = function (a, b) {
+    return a + b;
+}
+</code></pre>
+<p><strong>局部函数</strong> <strong>let</strong></p>
+<pre><code class="language-js">function test() {
+    for (var i = 0; i &lt; 100; i++) {
+        console.log(i);
+    }
+    console.log(i)//i 出了作用域还可以使用
+}
+</code></pre>
+<p>ES6 let关键字，解决局部作用域冲突问题</p>
+<pre><code class="language-js">function test() {
+    for (let i = 0; i &lt; 100; i++) {
+        console.log(i);
+    }
+    console.log(i)//Uncaught ReferenceError: i is not defined
+}
+</code></pre>
+<p><strong>常量 const</strong></p>
+<p>ES6引入</p>
+<pre><code class="language-js">const PI = 3.1415926;
+</code></pre>
+<h2 id="3-方法">3、方法</h2>
+<p><strong>定义方法</strong></p>
+<p>方法就是把函数放在对象里，对象只有两个东西：属性 和 方法</p>
+<pre><code class="language-js">var person = {
+    //属性
+    name: &quot;夜十七&quot;,
+    birth: 2000,
+    //方法
+    age: function () {
+        var now = new Date().getFullYear();
+        return now - this.birth;
+    }
+}
+</code></pre>
+<p>this默认指向调用它的对象</p>
+<p><strong>apply</strong></p>
+<p>apply可以控制this指向</p>
+<pre><code class="language-js">function getAge() {
+    var now = new Date().getFullYear();
+    return now - this.birth;
+}
+
+var person = {
+    //属性
+    name: &quot;夜十七&quot;,
+    birth: 2000,
+    //方法
+    age: getAge
+};
+
+getAge.apply(person,[]);
+</code></pre>
+<h1 id="内部对象">内部对象</h1>
+<h2 id="1-date">1、Date</h2>
+<pre><code class="language-js">var now = new Date();
+now.getFullYear();  //年
+now.getMonth(); //月 0~11
+now.getDate();  //日
+now.getDay();   //星期几
+now.getHours(); //时
+now.getMinutes();   //分
+now.getSeconds();   //秒
+now.getTime();  //时间戳
+</code></pre>
+<h2 id="2-json">2、JSON</h2>
+<p><strong>简介</strong></p>
+<ul>
+<li>
+<p>JSON 是一种轻量级的数据交换格式</p>
+</li>
+<li>
+<p>简洁和清晰的<strong>层次结构</strong>使得 JSON 成为理想的数据交换语言。</p>
+</li>
+<li>
+<p>易于人阅读和编写，同时也易于机器解析和生成，并有效地<strong>提升网络传输效率</strong>。</p>
+</li>
+</ul>
+<p>在JS一切皆为对象，任何JS支持的类型都可以用JSON来表示</p>
+<p><strong>格式</strong></p>
+<ul>
+<li>对象都用{}</li>
+<li>数组都用[]</li>
+<li>所有的键值对都是用key:value</li>
+</ul>
+<p>JSON字符串 和 JS对象的转化</p>
+<pre><code class="language-js">var user = {
+    name: &quot;yeshiqi&quot;,
+    age: 17,
+    sex: &quot;男&quot;
+}
+//对象转换为JSON字符串 &quot;{&quot;name&quot;:&quot;yeshiqi&quot;,&quot;age&quot;:17,&quot;sex&quot;:&quot;男&quot;}&quot;
+var jsonUser = JSON.stringify(user);
+//JSON字符串转换为对象
+var obj = JSON.parse('{&quot;name&quot;:&quot;yeshiqi&quot;,&quot;age&quot;:17,&quot;sex&quot;:&quot;男&quot;}');
+</code></pre>
+<h1 id="面向对象编程">面向对象编程</h1>
+<h2 id="1-js的面向对象">1、JS的面向对象</h2>
+<p><strong>原型：</strong></p>
+<pre><code class="language-js">var student = {
+    name: &quot;student&quot;,
+    age: 18,
+    run: function () {
+        console.log(this.name + &quot; run...&quot;);
+    }
+}
+
+var xiaoming = {
+    name: &quot;xiaoming&quot;
+}
+//小明的原型是student
+xiaoming.__proto__ = student;
+</code></pre>
+<p><strong>class 继承</strong></p>
+<p>ES6引入</p>
+<p>1、定义一个类，属性，方法</p>
+<pre><code class="language-js">class Student{
+    constructor(name) {
+        this.name = name;
+    }
+
+    hello(){
+        alert(&quot;hello&quot;);
+    }
+}
+
+var xiaoming = new Student(xiaoming);
+</code></pre>
+<p>2、继承</p>
+<pre><code class="language-js">class Student{
+    constructor(name) {
+        this.name = name;
+    }
+
+    hello(){
+        alert(&quot;hello&quot;);
+    }
+}
+
+class XiaoStudent extends Student{
+    constructor(name,grade) {
+        super(name);
+        this.grade=grade;
+    }
+
+    myGrade(){
+        alert(&quot;我是一名小学生&quot;);
+    }
+}
+var xiaohong = new XiaoStudent(xiaohong,1);
+</code></pre>
+<p>本质：仍是对象原型</p>
+<p><strong>原型链</strong></p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5CASUS%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210410211525677.png" alt="image-20210410211525677" loading="lazy"></figure>
+<h1 id="操作bom对象">操作BOM对象</h1>
+<p>BOM：浏览器对象模型</p>
+<ul>
+<li>IE6~11</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>FireFox</li>
+</ul>
+<p><strong>window</strong></p>
+<p>浏览器窗口</p>
+<pre><code class="language-js">window。alert(1)
+//浏览器高度宽度
+window.innerHeight
+358
+window.innerWidth
+1536
+window.outerHeight
+824
+window.outerWidth
+1536
+</code></pre>
+<p><strong>navigator</strong></p>
+<p>封装了浏览器的信息</p>
+<pre><code class="language-js">navigator.appName
+&quot;Netscape&quot;
+navigator.appVersion
+&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36&quot;
+navigator.userAgent
+&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36&quot;
+navigator.platform
+&quot;Win32&quot;
+</code></pre>
+<p>大多时候，不会使用navigator对象，因为会被人为修改</p>
+<p>不建议使用这些属性来判断和编写代码</p>
+<p><strong>screen</strong></p>
+<p>代表电脑屏幕尺寸</p>
+<pre><code class="language-js">screen.width
+1536
+screen.height
+864
+</code></pre>
+<p><strong>location</strong></p>
+<p>代表当前页面的URL信息</p>
+<pre><code class="language-js">1. host: &quot;www.baidu.com&quot;
+2. href: &quot;https://www.baidu.com/&quot;
+protocol: &quot;https:&quot;
+reload: ƒ reload() //刷新网页
+//设置新的地址
+location.assign('https://www.bilibili.com/')
+</code></pre>
+<p><strong>document</strong></p>
+<p>代表当前的页面，HTML，DOM文档树</p>
+<pre><code class="language-js">document.title
+&quot;百度一下，你就知道&quot;
+document.title=&quot;夜十七&quot;
+&quot;夜十七&quot;
+</code></pre>
+<p>获取具体的文档树节点</p>
+<pre><code class="language-html">&lt;dl id=&quot;app&quot;&gt;
+    &lt;dt&gt;Java&lt;/dt&gt;
+    &lt;dt&gt;JavaSE&lt;/dt&gt;
+    &lt;dt&gt;JavaEE&lt;/dt&gt;
+&lt;/dl&gt;
+
+&lt;script&gt;
+    var d1 = document.getElementById(&quot;app&quot;);
+&lt;/script&gt;
+</code></pre>
+<p>获取cookie</p>
+<pre><code class="language-js">document.cookie
+&quot;BIDUPSID=D4B94A3DC8217F92EFCAB6F698F37EA8; PSTM=1616208831;
+</code></pre>
+<p><strong>history</strong></p>
+<pre><code class="language-js">history.back() //后退
+history.forward() //前进
+</code></pre>
+<h1 id="操作dom对象">操作DOM对象</h1>
+<p>DOM：文档对象模型</p>
+<p>浏览器网页就是一个DOM树形结构</p>
+<ul>
+<li>更新：更新DOM节点</li>
+<li>遍历DOM节点：得到DOM节点</li>
+<li>删除：删除一个DOM节点</li>
+<li>添加：添加一个新的节点</li>
+</ul>
+<p>要操作一个DOM节点，就必须先获得这个DOM节点</p>
+<p><strong>获得DOM节点</strong></p>
+<pre><code class="language-js">//对应css选择器
+var h1 = document.getElementsByTagName(&quot;h1&quot;);
+var p1 = document.getElementById(&quot;p1&quot;);
+var p2 = document.getElementsByClassName(&quot;p2&quot;);
+var father = document.getElementById(&quot;father&quot;);
+var children = father.children; //获取父节点下的所有的子节点
+//father.firstChild;
+//father.lastChild;
+</code></pre>
+<p><strong>更新节点</strong></p>
+<pre><code class="language-html">&lt;div id=&quot;id1&quot;&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+    var id1 = document.getElementById(&quot;id1&quot;);
+&lt;/script&gt;
+</code></pre>
+<p>操作文本</p>
+<pre><code class="language-js">id1.innerText=&quot;123&quot; //修改文本的值
+id1.innerHTML=&quot;&lt;strong&gt;123&lt;/strong&gt;&quot;//可以解析HTML文本标签
+</code></pre>
+<p>操作css</p>
+<pre><code class="language-js">id1.style.color=&quot;red&quot;
+id1.style.fontSize=&quot;200px&quot;
+</code></pre>
+<p><strong>删除节点</strong></p>
+<p>步骤：先获取父节点，再通过父节点删除自己</p>
+<pre><code class="language-html">&lt;div id=&quot;father&quot;&gt;
+    &lt;h1&gt;标题一&lt;/h1&gt;
+    &lt;p1 id=&quot;p1&quot;&gt;p1&lt;/p1&gt;
+    &lt;p1 class=&quot;p2&quot;&gt;p2&lt;/p1&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    var self = document.getElementById(&quot;p1&quot;);
+    var father = self.parentElement;
+    father.removeChild(self);
+&lt;/script&gt;
+</code></pre>
+<p>注：删除多个节点的时候，children是在时刻变化的！</p>
+<p><strong>插入节点</strong></p>
+<p>我们获得了某个DOM节点，假设这个DOM节点是空的，可以通innerHTML就可以增加一个元素。如果已经存在元素，则会覆盖</p>
+<h1 id="操作表单">操作表单</h1>
+<p><strong>设置表单</strong></p>
+<pre><code class="language-html">&lt;form action=&quot;#&quot; method=&quot;post&quot;&gt;
+    &lt;p&gt;
+        &lt;span&gt;用户名: &lt;/span&gt;
+        &lt;input type=&quot;text&quot; id=&quot;username&quot;&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;span&gt;性别: &lt;/span&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;man&quot; id=&quot;boy&quot;&gt; 男
+        &lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;woman&quot; id=&quot;girl&quot;&gt; 女
+    &lt;/p&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    //得到输入框的值
+    var input_text = document.getElementById(&quot;username&quot;);
+    //修改输入框的值
+    input_text.value = &quot;123&quot;;
+
+    //对于单选框、多选框等固定的值，.value只能获得当前的值
+    var boy_radio = document.getElementById(&quot;boy&quot;);
+    var girl_radio = document.getElementById(&quot;girl&quot;);
+    //查看选中的值，若返回true，则被选中
+    boy_radio.check;
+    //修改选择框
+    girl_radio.check = true;
+&lt;/script&gt;
+</code></pre>
+<p><strong>提交表单</strong></p>
+<pre><code class="language-html">&lt;!--表单绑定提交时间
+onclick=绑定一个提交检测的函数
+将这个结果返回给表单，使用onclick接收
+--&gt;
+&lt;form action=&quot;#&quot; method=&quot;post&quot; onclick=&quot;return check()&quot;&gt;
+    &lt;p&gt;
+        &lt;span&gt;用户名：&lt;/span&gt;&lt;input type=&quot;text&quot; id=&quot;username&quot; name=&quot;username&quot;&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;span&gt;密码：&lt;/span&gt;&lt;input type=&quot;password&quot; id=&quot;input-pwd&quot;&gt;
+    &lt;/p&gt;
+    &lt;input type=&quot;hidden&quot; id=&quot;md5-pwd&quot; name=&quot;pwd&quot;&gt;
+    &lt;!--绑定事件 onclick被点击--&gt;
+    &lt;button type=&quot;submit&quot; onclick=&quot;check()&quot;&gt;提交&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+    function check(){
+        let username = document.getElementById(&quot;username&quot;);
+        let input_pwd = document.getElementById(&quot;input-pwd&quot;);
+        let md5pwd = document.getElementById(&quot;md5-pwd&quot;);
+        //MD5加密
+        md5pwd.value = md5(input_pwd.value);
+        //可以判断表单内容，true就是通过提交
+        return true;
+    }
+&lt;/script&gt;
+</code></pre>
+<h1 id="jquery">jQuery</h1>
+<h2 id="1-基础">1、基础</h2>
+<p>jQuery库，里面存在大量的JS函数</p>
+<p><strong>载入jQuery的方法</strong></p>
+<pre><code class="language-html">&lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>并在写入后，将鼠标光标放于该URL中，按Alt+enter，选择载入该模块。</p>
+<p><strong>公式：$(selector).action()</strong></p>
+<pre><code class="language-html">&lt;a href=&quot;&quot; id=&quot;test-jQuery&quot;&gt;点我&lt;/a&gt;
+
+&lt;script&gt;
+    //selector就是CSS选择器
+    $(&quot;#test-jQuery&quot;).click(function (){
+        alert(&quot;hello&quot;)
+    })
+&lt;/script&gt;
+</code></pre>
+<h2 id="2-事件">2、<strong>事件</strong></h2>
+<p><strong>鼠标事件</strong></p>
+<pre><code class="language-css">style&gt;
+    #divMove {
+        width: 500px;
+        height: 500px;
+        border: 1px solid red;
+    }
+&lt;/style&gt;
+</code></pre>
+<pre><code class="language-html">&lt;!--获取鼠标当前的一个坐标--&gt;
+mouse：&lt;span id=&quot;mouseMove&quot;&gt;&lt;/span&gt;
+&lt;div id=&quot;divMove&quot;&gt;
+    在这里移动鼠标试试
+&lt;/div&gt;
+
+&lt;script&gt;
+    &quot;use strict&quot;
+    //网页加载完毕之后，响应事件
+    $(document).ready(function () {
+        $('#divMove').mousemove(function (e) {
+            $('#mouseMove').text(&quot;x:&quot; + e.pageX + &quot;y:&quot; + e.pageY);
+        });
+    });
+&lt;/script&gt;
+</code></pre>
+<p><strong>键盘事件，其他事件</strong></p>
+<h2 id="3-操作dom">3、操作DOM</h2>
+<p><strong>节点文本操作</strong></p>
+<pre><code class="language-js">$('#test-ul li[name=python]').text();//获得值
+$('#test-ul li[name=python]').text('设置值');
+$('#test-ul li[name=python]').html();//获得值
+$('#test-ul li[name=python]').html('&lt;strong&gt;123&lt;/strong&gt;');//设置值
+</code></pre>
+<p>CSS<strong>操作</strong></p>
+<pre><code class="language-js">$('#test-ul li[name=python]').css('color','red')
+</code></pre>
+<p><strong>元素的显示与隐藏</strong></p>
+<p>本质display: none</p>
+<pre><code class="language-js">$('#test-ul li[name=python]').show()
+$('#test-ul li[name=python]').hide()
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[CSS]]></title>
+        <id>https://1489368019.github.io/post/css/</id>
+        <link href="https://1489368019.github.io/post/css/">
+        </link>
+        <updated>2021-04-06T13:21:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-css简介">1、CSS简介</h1>
+<p>Cascading Style Sheets（层叠样式表）</p>
+<p>CSS1.0</p>
+<p>CSS2.0 DⅣ(块) + CSS，HTML与CSS结构分离的思想，网页变得简单，SEO</p>
+<p>CSS2.1 浮动，定位</p>
+<p>CSS3.0 圆角，阴影，动画....浏览器兼容性</p>
+<h1 id="2-css导入方式">2、CSS导入方式</h1>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+
+    &lt;!--内部样式--&gt;
+    &lt;style&gt;
+        h1 {
+            color: green;
+        }
+    &lt;/style&gt;
+
+    &lt;!--外部样式--&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;&gt;
+&lt;head&gt;
+&lt;body&gt;
+&lt;!--行内样式：在标签元素中，编写一个style属性--&gt;
+&lt;h1 style=&quot;color: red&quot;&gt;我是标题&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>优先级：<strong>就近原则</strong></p>
+<h1 id="3-基本选择器">3、基本选择器</h1>
+<ul>
+<li>
+<p>标签选择器</p>
+<pre><code class="language-css">/*标签选择器：会选择到页面上所有的这个标签的元素*/
+h1{
+    color: #118e42;
+}
+</code></pre>
+</li>
+<li>
+<p>类选择器</p>
+<pre><code class="language-css">/*类选择器
+格式：.class{}
+好处：可以多个标签归类，是同一个class，可以复用
+*/
+.title1{
+    color: #cbd709;
+}
+.title2{
+    color: #ba0f0f;
+}
+</code></pre>
+</li>
+<li>
+<p>id选择器</p>
+<pre><code class="language-css">/*id选择器
+格式：#id名{}
+id全局唯一
+*/
+#id1{
+    color: #ba0f0f;
+}
+</code></pre>
+</li>
+</ul>
+<p><strong>优先级：id选择器 &gt; 类选择器 &gt; 标签选择器</strong></p>
+<h1 id="4-层次选择器">4、层次选择器</h1>
+<ul>
+<li>
+<p>后代选择器：在某个元素后面所有</p>
+<pre><code class="language-css">/*后代选择器*/
+body p {
+    background: red;
+}
+</code></pre>
+</li>
+<li>
+<p>子选择器：一代</p>
+</li>
+<li>
+<pre><code class="language-css">/*子选择器*/
+body&gt;p {
+    background: yellow;
+}
+</code></pre>
+</li>
+<li>
+<p>相邻兄弟选择器：只有一个，向下相邻</p>
+<pre><code class="language-css">/*相邻兄弟选择器*/
+.active + p {
+    background: brown;
+}
+</code></pre>
+</li>
+<li>
+<p>通用选择器：当前选中元素向下的所有的兄弟元素</p>
+<pre><code class="language-c's's">/*通用选择器*/
+.active ~ p {
+    background: blue;
+}
+</code></pre>
+</li>
+</ul>
+<h1 id="5-结构伪类选择器">5、结构伪类选择器</h1>
+<p>伪类：条件</p>
+<pre><code class="language-css">/*ul的第一个子元素*/
+ul li:first-child{
+    background: green;
+}
+/*ul的最后一个元素*/
+ul li:last-child{
+    background: blue;
+}
+</code></pre>
+<pre><code class="language-css">/*选择当前p元素的父级元素,选中父级元素的第一个子元素,且是当前元素才生效 -顺序*/
+p:nth-child(2){
+    background: blueviolet;
+}
+/*选中父元素,下的p元素的第二个 -类型*/
+p:nth-of-type(2){
+    background: red;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1617715387134.png" alt="" loading="lazy"></figure>
+<h1 id="6-属性选择器">6、属性选择器</h1>
+<pre><code class="language-c's's">a[id=&quot;first&quot;]{
+    background: yellow;
+}
+</code></pre>
+<pre><code>= 绝对等于
+
+*= 包含这个元素
+
+^=  以这个开头
+
+$=   以这个结尾
+</code></pre>
+<h1 id="7-字体样式">7、字体样式</h1>
+<p>span标签：重点突出的字</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        #title1{
+            font-size: 50px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+欢迎学习&lt;span id=&quot;title1&quot;&gt;Java&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>font-family:   字体<br>
+font-size:       字体大小<br>
+font-weight:  字体粗细<br>
+color:              字体颜色</p>
+<h1 id="8-文本样式">8、文本样式</h1>
+<ul>
+<li>
+<p>text-align:center      --排版 ，居中</p>
+</li>
+<li>
+<p>text-indent:2em      --首行缩进2格</p>
+</li>
+<li>
+<p>height       块高</p>
+<p>line-height   行高</p>
+<p>行高 和 块高 一致时，就可以上下居中</p>
+</li>
+<li>
+<p>text-decoration:underline     --下划线</p>
+</li>
+<li>
+<p>color           颜色 （rgb，rgba）</p>
+</li>
+<li>
+<p>text-shadow:     阴影</p>
+</li>
+</ul>
+<h1 id="9-超链接伪类">9、超链接伪类</h1>
+<pre><code class="language-css">&lt;style&gt;
+/*默认的颜色*/
+a {
+    text-decoration: none;
+    color: #000;
+}
+/*鼠标悬浮的状态（只需要记住:hover) */
+a: hover {
+    color: orange;
+    font-size: 5Opx;
+}
+/*鼠标按住未释放的状态*/
+a : active {
+    color: green;
+}
+&lt; / style&gt;
+</code></pre>
+<h1 id="11-背景图像">11、背景图像</h1>
+<p>background-image：url(&quot;...&quot;) ;   默认是全部平铺</p>
+<p>background-repeat: repeat-x;</p>
+<p>background-repeat: repeat-y;</p>
+<p>background-repeat: no-repeat;</p>
+<p>/<em>数色，图片。终片位置,严铺方式</em>/<br>
+background: red ur1(&quot; ../images/d.gif&quot;) 270px 10px no-repeat;</p>
+<h1 id="12-盒子模型">12、盒子模型</h1>
+<h2 id="1-盒子模型">1、盒子模型</h2>
+<figure data-type="image" tabindex="2"><img src="https://1489368019.github.io/post-images/1617715762968.png" alt="" loading="lazy"></figure>
+<p>margin：外边距</p>
+<p>padding：内边距</p>
+<p>border：边框</p>
+<h2 id="2-边框">2、边框</h2>
+<p>1、边框的粗细</p>
+<p>2、边框的样式</p>
+<p>3、边框的颜色</p>
+<h1 id="13-圆角边框和阴影">13、圆角边框和阴影</h1>
+<pre><code class="language-css">&lt;style&gt;
+    div{
+        width: 100px;
+        height: 50px;
+        margin: 30px;
+        border: 1px solid red;
+        border-radius: 50px;
+    }
+&lt;/style&gt;
+</code></pre>
+<h1 id="14-display">14、display</h1>
+<pre><code class="language-css">&lt;style&gt;
+    /*block：块元素
+    inline：行内元素
+    inline-block：是块级元素，但可以内联在一行
+    */
+    div{
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        display: inline-block;
+    }
+    span{
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        display: inline-block;
+    }
+&lt;/style&gt;
+</code></pre>
+<h1 id="15-浮动">15、浮动</h1>
+<h2 id="1-左右-浮动">1、左右 浮动</h2>
+<p>应用：可以让多个块级元素一行内排列显示</p>
+<p>float:left;</p>
+<p>float:right;</p>
+<h2 id="2-解决父级边框塌陷">2、解决父级边框塌陷</h2>
+<p><strong>1、增加父级元素的高度~</strong></p>
+<pre><code class="language-css">#father {
+		border: 1px #000 so7id;
+		height : 800px;
+}
+</code></pre>
+<p><strong>2、增加一个空的div标签，清除浮动</strong></p>
+<pre><code class="language-css">&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+
+.clear {
+   	clear: both;
+    margin: 0;
+   	padding: 0;
+}
+</code></pre>
+<p>3、<strong>overflow</strong></p>
+<pre><code>在父级元素中增加一个 overflow: hidden;
+</code></pre>
+<p><strong>4、父类添加一个伪类：after</strong></p>
+<pre><code class="language-css">#father:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+</code></pre>
+<h1 id="16-定位">16、定位</h1>
+<h2 id="1-相对定位">1、相对定位</h2>
+<p><strong>position: relative;</strong></p>
+<p>存在标准文档流</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        bady{
+            padding: 20px;
+        }
+        div{
+            margin: 10px;
+            padding: 5px;
+            font-size: 12px;
+            line-height: 25px;
+        }
+        #father {
+            border: 1px solid #666;
+            padding: 0;
+        }
+        #first {
+            background: #ee2d59;
+            border: 1px dashed black;
+            /*相对定位：上下左右*/
+            position: relative;
+            left: -20px;
+            top: 10px;
+        }
+        #second {
+            background: #2648c1;
+            border: 1px dashed black;
+        }
+        #third {
+            background: #d0dc26;
+            border: 1px dashed black;
+            position: relative;
+            right: -15px;
+            bottom: 15px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;father&quot;&gt;
+    &lt;div id=&quot;first&quot;&gt;第一个div&lt;/div&gt;
+    &lt;div id=&quot;second&quot;&gt;第二个div&lt;/div&gt;
+    &lt;div id=&quot;third&quot;&gt;第三个div&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="2-绝对定位">2、绝对定位</h2>
+<p><strong>position: absolute;</strong></p>
+<p>定位：基于xxx定位，上下左右</p>
+<ul>
+<li>没有父级元素定位的前提下，相对于浏览器定位</li>
+<li>假设父级元素存在定位，我们通常相对于父级元素进行偏移</li>
+<li>在父级元素范围内移动</li>
+<li>不存在标准文档流</li>
+</ul>
+<h2 id="3-固定定位">3、固定定位</h2>
+<p><strong>position: fixed;</strong></p>
+<p>不会随浏览器移动</p>
+<h2 id="4-z-index">4、z-index</h2>
+<p>图层</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[HTMl]]></title>
+        <id>https://1489368019.github.io/post/html/</id>
+        <link href="https://1489368019.github.io/post/html/">
+        </link>
+        <updated>2021-04-02T12:56:18.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-简介">1、简介</h1>
+<ul>
+<li>
+<p>Hyper Text Markup Language（超文本标记语言）</p>
+</li>
+<li>
+<p>W3C World Wide Web Consortium （万维网联盟）</p>
+</li>
+<li>
+<p>W3C标准</p>
+<ol>
+<li>结构化标准语言（HTML、XML）</li>
+<li>表现标准语言（CSS）</li>
+<li>行为标准（DOM、ECMAScript）</li>
+</ol>
+</li>
+</ul>
+<h1 id="2-idea配置html浏览器">2、IDEA配置HTML浏览器</h1>
+<p>1、<img src="https://1489368019.github.io/post-images/1617368368735.png" alt="" loading="lazy"></p>
+<p>2、<img src="https://1489368019.github.io/post-images/1617368423008.png" alt="" loading="lazy"></p>
+<h1 id="3-主要标签">3、主要标签</h1>
+<pre><code class="language-html">&lt;!--网页的规范--&gt;
+&lt;!DOCTYPE html&gt;
+
+&lt;html lang=&quot;en&quot;&gt;
+
+&lt;!--head标签代表网页头部--&gt;
+&lt;head&gt;
+    &lt;!--meta描述性标签，用来描述网站的一些信息--&gt;
+    &lt;!--meta用来做SEO（搜索引擎优化 ）--&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;夜十七，学习笔记&quot;&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;记录学习HTML的地方&quot;&gt;
+
+    &lt;!--title网页标题--&gt;
+    &lt;title&gt;我的第一个网页&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;!--body标签代表网页主体--&gt;
+&lt;body&gt;
+hello,world!
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h1 id="4-基本标签">4、基本标签</h1>
+<p><strong>标题标签</strong></p>
+<pre><code class="language-html">&lt;!--标题标签--&gt;
+&lt;h1&gt;一级标题&lt;/h1&gt;
+&lt;h2&gt;二级标签&lt;/h2&gt;
+&lt;h3&gt;三级标签&lt;/h3&gt;
+&lt;h4&gt;四级标签&lt;/h4&gt;
+&lt;h5&gt;五级标签&lt;/h5&gt;
+&lt;h6&gt;六级标签&lt;/h6&gt;
+</code></pre>
+<p><strong>段落标签</strong></p>
+<pre><code class="language-html">&lt;p&gt;上善若水。&lt;/p&gt;
+&lt;p&gt;水善利万物而不争，处众人之所恶,故几于道。&lt;/p&gt;
+&lt;p&gt;居善地；心善渊；&lt;/p&gt;
+&lt;p&gt;与善仁；言善信；&lt;/p&gt;
+&lt;p&gt;政善治；事善能；&lt;/p&gt;
+&lt;p&gt;动善时。夫唯不争，故无尤&lt;/p&gt;
+</code></pre>
+<p><strong>换行标签</strong></p>
+<pre><code class="language-html">上善若水。&lt;br/&gt;
+水善利万物而不争，处众人之所恶,故几于道。&lt;br/&gt;
+居善地；心善渊；&lt;br/&gt;
+与善仁；言善信；&lt;br/&gt;
+政善治；事善能；&lt;br/&gt;
+动善时。夫唯不争，故无尤 &lt;br/&gt;
+</code></pre>
+<p><strong>水平线标签</strong></p>
+<pre><code class="language-html">&lt;hr/&gt;
+</code></pre>
+<p><strong>字体样式标签</strong></p>
+<pre><code class="language-html">粗体：&lt;strong&gt;i love you&lt;/strong&gt;
+斜体：&lt;em&gt;i love you&lt;/em&gt;
+</code></pre>
+<p><strong>特殊符号</strong></p>
+<p>格式：&amp;__ ;</p>
+<p>常用的</p>
+<pre><code class="language-html">空格：&amp;nbsp;
+&gt;：&amp;gt;
+&lt;：&amp;lt;
+</code></pre>
+<h1 id="5-图像标签">5、图像标签</h1>
+<p><strong>常见的图像格式</strong></p>
+<ul>
+<li>JPG</li>
+<li>GIF</li>
+<li>PNG</li>
+<li>BMP</li>
+</ul>
+<p><strong>图像标签</strong></p>
+<pre><code class="language-html">&lt;!--img图像标签
+src：图片地址
+   相对路径（一般使用）
+   ../  --上一级目录
+   /    --下一级目录
+   绝对路径
+   D:\IdeaProjects\HTML\resources\images\1.png
+alt：图片加载失败所显示的文字
+title：悬停文字
+width：宽度
+height：高度
+--&gt;
+&lt;img src=&quot;../resources/images/1.png&quot; alt=&quot;LOL&quot; title=&quot;悬停文字&quot;&gt;
+</code></pre>
+<h1 id="6-连接标签">6、连接标签</h1>
+<p>a<strong>标签</strong></p>
+<pre><code class="language-html">&lt;!--a标签
+href：必填，表示要跳转到那个页面
+target：表示窗口在那里打开
+    _blank 在新窗口打开
+    _self  在当前窗口打开
+--&gt;
+&lt;a href=&quot;1.我的第一个网页.html&quot; target=&quot;_blank&quot;&gt;点击跳转到我的页面&lt;/a&gt;
+&lt;a href=&quot;https://www.baidu.com&quot; target=&quot;_self&quot;&gt;点击跳转到百度页面&lt;/a&gt;
+&lt;br/&gt;
+&lt;a href=&quot;1.我的第一个网页.html&quot;&gt;
+    &lt;img src=&quot;../resources/images/1.png&quot; alt=&quot;LOL&quot; title=&quot;悬停文字&quot;&gt;
+&lt;/a&gt;
+</code></pre>
+<p><strong>锚链接</strong></p>
+<pre><code class="language-html">&lt;!--锚链接
+1.设置一个锚链接
+2.跳转到标记 #
+--&gt;
+&lt;a name=&quot;top&quot;&gt;顶部&lt;/a&gt;
+
+&lt;a href=&quot;#top&quot;&gt;回到顶部&lt;/a&gt;
+
+&lt;!--跳转到其他链接某一个位置--&gt;
+&lt;a href=&quot;4.链接标签.html#down&quot;&gt;跳转&lt;/a&gt;
+</code></pre>
+<p><strong>功能性链接</strong></p>
+<pre><code class="language-html">&lt;!--功能性链接
+邮箱链接：mailto:邮箱地址
+--&gt;
+&lt;a href=&quot;mailto:1489368019@qq.com&quot;&gt;点击联系我&lt;/a&gt;
+</code></pre>
+<h1 id="7-行内元素和块元素">7、行内元素和块元素</h1>
+<p><strong>块元素</strong></p>
+<ul>
+<li>无论内容多少，该元素独占一行</li>
+<li>（p、h1-h6.。。。）</li>
+</ul>
+<p><strong>行内元素</strong></p>
+<ul>
+<li>内容撑开宽度，左右都是行内元素的可以在排在一行</li>
+<li>（a、strong、em。。。）</li>
+</ul>
+<h1 id="8-列表标签">8、列表标签</h1>
+<pre><code class="language-html">&lt;!--有序列表--&gt;
+&lt;ol&gt;
+    &lt;li&gt;Java&lt;/li&gt;
+    &lt;li&gt;Python&lt;/li&gt;
+    &lt;li&gt;前端&lt;/li&gt;
+    &lt;li&gt;后端&lt;/li&gt;
+    &lt;li&gt;C/C++&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!--无序列表--&gt;
+&lt;ul&gt;
+    &lt;li&gt;Java&lt;/li&gt;
+    &lt;li&gt;Python&lt;/li&gt;
+    &lt;li&gt;前端&lt;/li&gt;
+    &lt;li&gt;后端&lt;/li&gt;
+    &lt;li&gt;C/C++&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!--自定义列表
+dl：标签
+dt：列表标签
+dd：列表内容
+--&gt;
+&lt;dl&gt;
+    &lt;dt&gt;学科&lt;/dt&gt;
+    &lt;dd&gt;Java&lt;/dd&gt;
+    &lt;dd&gt;Python&lt;/dd&gt;
+    &lt;dd&gt;Linux&lt;/dd&gt;
+    &lt;dd&gt;C/C++&lt;/dd&gt;
+
+    &lt;dt&gt;位置&lt;/dt&gt;
+    &lt;dd&gt;北京&lt;/dd&gt;
+    &lt;dd&gt;上海&lt;/dd&gt;
+    &lt;dd&gt;河南&lt;/dd&gt;
+    &lt;dd&gt;湖南&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+<h1 id="9-表格标签">9、表格标签</h1>
+<pre><code class="language-html">&lt;!--表格标签
+行：tr
+列：td
+--&gt;
+&lt;!--border 边框--&gt;
+&lt;table border=&quot;1px&quot;&gt;
+    &lt;tr&gt;
+        &lt;!--colspan 跨列--&gt;
+        &lt;td colspan=&quot;4&quot;&gt;1-1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;!--rowspan 跨行--&gt;
+        &lt;td rowspan=&quot;2&quot;&gt;2-1&lt;/td&gt;
+        &lt;td&gt;2-2&lt;/td&gt;
+        &lt;td&gt;2-3&lt;/td&gt;
+        &lt;td&gt;2-4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;3-2&lt;/td&gt;
+        &lt;td&gt;3-3&lt;/td&gt;
+        &lt;td&gt;3-4&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<h1 id="10-媒体元素">10、媒体元素</h1>
+<pre><code class="language-html">&lt;!--音频和视频
+src：资源路径
+controls：控制条
+autoplay：自动播放
+--&gt;
+&lt;video src=&quot;../resources/video/More.mp4&quot; controls autoplay&gt;&lt;/video&gt;
+&lt;audio src=&quot;../resources/audio/Enchant.mp3&quot; controls autoplay&gt;&lt;/audio&gt;
+</code></pre>
+<h1 id="11-页面结构分析">11、页面结构分析</h1>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1617368450544.png" alt="" loading="lazy"></figure>
+<h1 id="12-内联框架iframe">12、内联框架iframe</h1>
+<pre><code class="language-html">&lt;!--iframe内联框架
+src：页面地址
+w-d：宽度高度
+name：框架标识名
+--&gt;
+&lt;iframe src=&quot;&quot; name=&quot;hello&quot; frameborder=&quot;0&quot; width=&quot;800px&quot; height=&quot;600px&quot;&gt;&lt;/iframe&gt;
+
+&lt;a href=&quot;https://www.bilibili.com&quot; target=&quot;hello&quot;&gt;点击我跳转&lt;/a&gt;
+</code></pre>
+<h1 id="13-表单">13、表单</h1>
+<pre><code class="language-html">&lt;!--表单
+action：表单提交的位置，可以是网站，也可以是请求处理地址
+method：提交方式 post、get
+    get：我们可以在url看到我们提交的信息，不安全，高效
+    post：较为安全，可传输大文件
+--&gt;
+&lt;form action=&quot;1.我的第一个网页.html&quot; method=&quot;get&quot;&gt;
+    &lt;!--文本输入框：input type=&quot;text&quot;--&gt;
+    &lt;p&gt;名字: &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/p&gt;
+    &lt;!--密码输入框：input type=&quot;password&quot;--&gt;
+    &lt;p&gt;密码: &lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;/p&gt;
+    &lt;p&gt;性别:
+        &lt;!--单选框 input type=&quot;radio&quot;
+        value：单选框的值
+        name：表示组
+        --&gt;
+        &lt;input type=&quot;radio&quot; value=&quot;boy&quot; name=&quot;sex&quot;&gt;男
+        &lt;input type=&quot;radio&quot; value=&quot;girl&quot; name=&quot;sex&quot;&gt;女
+    &lt;/p&gt;爱好:
+    &lt;!--多选框 type=&quot;checkbox&quot;--&gt;
+    &lt;input type=&quot;checkbox&quot; value=&quot;sleep&quot; name=&quot;hobby&quot;&gt;睡觉
+    &lt;input type=&quot;checkbox&quot; value=&quot;code&quot; name=&quot;hobby&quot;&gt;敲代码
+    &lt;input type=&quot;checkbox&quot; value=&quot;chat&quot; name=&quot;hobby&quot;&gt;聊天
+    &lt;input type=&quot;checkbox&quot; value=&quot;game&quot; name=&quot;hobby&quot;&gt;游戏
+    &lt;!--按钮
+    input type=&quot;button&quot;  普通按钮
+    input type=&quot;image&quot;   图像按钮
+    input type=&quot;submit&quot;  提交按钮
+    input type=&quot;reset&quot;   重置按钮
+    --&gt;
+    &lt;p&gt;按钮:
+        &lt;input type=&quot;button&quot; name=&quot;btn1&quot; value=&quot;点击变长&quot;&gt;
+&lt;!--        &lt;input type=&quot;image&quot; src=&quot;../resources/images/1.png&quot;&gt;--&gt;
+    &lt;/p&gt;
+
+    &lt;!--下拉框，列表框--&gt;
+    &lt;p&gt;国家:
+        &lt;select name=&quot;列表名称&quot;&gt;
+            &lt;option value=&quot;china&quot;&gt;中国&lt;/option&gt;
+            &lt;option value=&quot;us&quot;&gt;美国&lt;/option&gt;
+            &lt;option value=&quot;Switzerland&quot;&gt;瑞士&lt;/option&gt;
+            &lt;option value=&quot;japan&quot;&gt;日本&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/p&gt;
+
+    &lt;!--文本域--&gt;
+    &lt;p&gt;反馈:
+        &lt;textarea name=&quot;textarea&quot; cols=&quot;30&quot; rows=&quot;10&quot;&gt;文本内容&lt;/textarea&gt;
+    &lt;/p&gt;
+    &lt;!--文件域--&gt;
+    &lt;p&gt;
+        &lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;
+    &lt;/p&gt;
+    &lt;!--邮箱--&gt;
+    &lt;p&gt;邮箱:
+        &lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;
+    &lt;/p&gt;
+    &lt;!--URL--&gt;
+    &lt;p&gt;URL:
+        &lt;input type=&quot;url&quot; name=&quot;url&quot;&gt;
+    &lt;/p&gt;
+    &lt;!--数字--&gt;
+    &lt;p&gt;商品数量:
+        &lt;input type=&quot;number&quot; name=&quot;num&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;1&quot;&gt;
+    &lt;/p&gt;
+    &lt;!--滑块--&gt;
+    &lt;p&gt;音量:
+        &lt;input type=&quot;range&quot; name=&quot;voice&quot; min=&quot;0&quot; max=&quot;100&quot;&gt;
+    &lt;/p&gt;
+    &lt;!--搜索框--&gt;
+    &lt;p&gt;搜索:
+        &lt;input type=&quot;search&quot; name=&quot;search&quot;&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+        &lt;!--提交--&gt;
+        &lt;input type=&quot;submit&quot;&gt;
+        &lt;!--重置--&gt;
+        &lt;input type=&quot;reset&quot;&gt;
+    &lt;/p&gt;
+&lt;/form&gt;
+</code></pre>
+<p><strong>表单元素</strong></p>
+<figure data-type="image" tabindex="2"><img src="C:%5CUsers%5CASUS%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210404162530382.png" alt="image-20210404162530382" loading="lazy"></figure>
+<p><strong>表单的应用</strong></p>
+<ul>
+<li>
+<p>隐藏域  hidden</p>
+</li>
+<li>
+<p>只读  readonly</p>
+</li>
+<li>
+<p>禁用    disabled</p>
+</li>
+<li>
+<p>label 增强鼠标的可用性</p>
+<pre><code class="language-html">&lt;p&gt;
+    &lt;label for=&quot;mark&quot;&gt;点击&lt;/label&gt;
+    &lt;input type=&quot;text&quot; id=&quot;mark&quot;&gt;
+&lt;/p&gt;
+</code></pre>
+</li>
+</ul>
+<p><strong>表单初级验证</strong></p>
+<ul>
+<li>placeholder   提示信息</li>
+<li>required    非空判断</li>
+<li>pattern    正则表达式</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[数据库驱动包下载]]></title>
+        <id>https://1489368019.github.io/post/shu-ju-ku-qu-dong-bao-xia-zai/</id>
+        <link href="https://1489368019.github.io/post/shu-ju-ku-qu-dong-bao-xia-zai/">
+        </link>
+        <updated>2021-04-01T10:58:06.000Z</updated>
+        <content type="html"><![CDATA[<p><strong>下载地址：http://mvnrepository.com/artifact/mysql/mysql-connector-java</strong></p>
+<h1 id="1-选择自己的版本">1、选择自己的版本</h1>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1617274946294.png" alt="" loading="lazy"></figure>
+<h1 id="2-点击jar">2、点击jar</h1>
+<p><img src="https://1489368019.github.io/post-images/1617274936582.png" alt="" loading="lazy">!</p>
+<h1 id="3-复制jar包-粘贴到文件下">3、复制jar包 粘贴到文件下</h1>
+<figure data-type="image" tabindex="2"><img src="https://1489368019.github.io/post-images/1617274954707.png" alt="" loading="lazy"></figure>
+<h1 id="4-添加到库中">4、添加到库中</h1>
+<figure data-type="image" tabindex="3"><img src="https://1489368019.github.io/post-images/1617274962621.png" alt="" loading="lazy"></figure>
+<h1 id="5-完成">5、完成</h1>
+<figure data-type="image" tabindex="4"><img src="https://1489368019.github.io/post-images/1617274968534.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[MySQL]]></title>
+        <id>https://1489368019.github.io/post/mysql/</id>
+        <link href="https://1489368019.github.io/post/mysql/">
+        </link>
+        <updated>2021-03-28T05:59:28.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="操作数据库">操作数据库</h1>
+<p>操作数据库 &gt; 操作表 &gt; 操作表中的数据<br>
+mysql关键字不区分大小写</p>
+<ul>
+<li>操作数据库
+<ol>
+<li>创建数据库：CREATE DATABASE [IF NOT EXISTS] westos</li>
+<li>删除数据库：DROP DATABASE IF EXISTS westos</li>
+</ol>
+</li>
+</ul>
+<h1 id="数据库引擎">数据库引擎</h1>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616977369581.png" alt="" loading="lazy"></figure>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="操作数据库">操作数据库</h1>
+<p>操作数据库 &gt; 操作表 &gt; 操作表中的数据<br>
+mysql关键字不区分大小写</p>
+<ul>
+<li>操作数据库
+<ol>
+<li>创建数据库：CREATE DATABASE [IF NOT EXISTS] westos</li>
+<li>删除数据库：DROP DATABASE IF EXISTS westos</li>
+</ol>
+</li>
+</ul>
+<h1 id="数据库引擎">数据库引擎</h1>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616977369581.png" alt="" loading="lazy"></figure>
+<!-- more -->
+<h1 id="delete-和-truncate-区别">delete 和 TRUNCATE 区别</h1>
+<ul>
+<li>相同点：都能删除数据</li>
+<li>不同：1. TRUNCATE 重新设置自增列，计数器会归零<br>
+2. TRUNCATE 不会影响事务</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[注解和反射]]></title>
+        <id>https://1489368019.github.io/post/zhu-jie-he-fan-she/</id>
+        <link href="https://1489368019.github.io/post/zhu-jie-he-fan-she/">
+        </link>
+        <updated>2021-03-27T04:50:25.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="注解">注解</h1>
+<ul>
+<li>作用
+<ol>
+<li>不是程序本身，可以对程序作出解释</li>
+<li>可以被其他程序（如：编译器等）读取</li>
+</ol>
+</li>
+<li>格式：以“@注释名”在代码中存在，还可以添加一些参数值<br>
+例：@Override、@SuppressWarnings(value=&quot;unchecked&quot;)</li>
+<li>自定义注解</li>
+</ul>
+<pre><code class="language-java">//自定义注解
+public class TestAnnotation {
+    //如果没有默认值，就必须给注解赋值
+    @MyAnnotation01(age = 1)
+    public void test01() {
+    }
+}
+
+//元注解
+//@Target 用于描述注解的使用范围
+@Target({ElementType.TYPE, ElementType.METHOD})
+//@Retention 用于描述注解的生命周期（SOURCE&lt;CLASS&lt;RUNTIME）
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation01 {
+    //注解的参数：参数类型 + 参数名();
+    //default 默认值
+    String value() default &quot;&quot;;
+    int age();
+    int id() default -1;
+    String[] schools() default {&quot;哈士奇&quot;, &quot;泰迪&quot;};
+}
+</code></pre>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="注解">注解</h1>
+<ul>
+<li>作用
+<ol>
+<li>不是程序本身，可以对程序作出解释</li>
+<li>可以被其他程序（如：编译器等）读取</li>
+</ol>
+</li>
+<li>格式：以“@注释名”在代码中存在，还可以添加一些参数值<br>
+例：@Override、@SuppressWarnings(value=&quot;unchecked&quot;)</li>
+<li>自定义注解</li>
+</ul>
+<pre><code class="language-java">//自定义注解
+public class TestAnnotation {
+    //如果没有默认值，就必须给注解赋值
+    @MyAnnotation01(age = 1)
+    public void test01() {
+    }
+}
+
+//元注解
+//@Target 用于描述注解的使用范围
+@Target({ElementType.TYPE, ElementType.METHOD})
+//@Retention 用于描述注解的生命周期（SOURCE&lt;CLASS&lt;RUNTIME）
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation01 {
+    //注解的参数：参数类型 + 参数名();
+    //default 默认值
+    String value() default &quot;&quot;;
+    int age();
+    int id() default -1;
+    String[] schools() default {&quot;哈士奇&quot;, &quot;泰迪&quot;};
+}
+</code></pre>
+<!-- more -->
+<h1 id="反射">反射</h1>
+<ul>
+<li>得到Class类的方法
+<ol>
+<li>直接通过一个class的静态变量class获取：<br>
+Class cls = String.class;</li>
+<li>如果我们有一个实例变量，可以通过该实例变量提供的getClass()方法获取：<br>
+String s = &quot;Hello&quot;;<br>
+Class cls = s.getClass();</li>
+<li>如果知道一个class的完整类名，可以通过静态方法Class.forName()获取：<br>
+Class cls = Class.forName(&quot;java.lang.String&quot;);</li>
+</ol>
+</li>
+<li>调用构造方法<br>
+getConstructor(Class...)：获取某个public的Constructor<br>
+getDeclaredConstructor(Class...)：获取某个private和public的Constructor<br>
+getConstructors()：获取所有public的Constructor</li>
+<li>调用方法<br>
+Method getMethod(name, Class...)：获取某个public的Method（包括父类）<br>
+Method getDeclaredMethod(name, Class...)：获取当前类的某个Method（不包括父类）<br>
+Method[] getMethods()：获取所有public的Method（包括父类）<br>
+Method[] getDeclaredMethods()：获取当前类的所有Method（不包括父类）</li>
+<li>访问字段<br>
+Field getField(name)：根据字段名获取某个public的field（包括父类）<br>
+Field getDeclaredField(name)：根据字段名获取当前类的某个field（不包括父类）<br>
+Field[] getFields()：获取所有public的field（包括父类）<br>
+Field[] getDeclaredFields()：获取当前类的所有field（不包括父类）</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[网络编程]]></title>
         <id>https://1489368019.github.io/post/wang-luo-bian-cheng/</id>
@@ -56,8 +1756,90 @@
 <!-- more -->
 <h1 id="tcp">TCP</h1>
 <ul>
-<li></li>
+<li>服务器端：用ServerSocket监听指定端口</li>
 </ul>
+<pre><code class="language-java">//服务器端
+public class TcpServerDemo2 {
+    public static void main(String[] args) throws IOException {
+        //创建服务
+        ServerSocket serverSocket = new ServerSocket(9000);
+        //监听客户端的链接
+        Socket socket = serverSocket.accept();
+        //读取文件
+        InputStream is = socket.getInputStream();
+        //写出文件
+        FileOutputStream fos = new FileOutputStream(&quot;receive.png&quot;);
+        int len;
+        while ((len = is.read()) != -1) {
+            fos.write(len);
+        }
+        //关闭资源
+        fos.close();
+        is.close();
+        socket.close();
+        serverSocket.close();
+    }
+}
+</code></pre>
+<ul>
+<li>客户端 ：用Socket(InetAddress, port)连接服务器</li>
+</ul>
+<pre><code class="language-java">//客户端
+public class TcpClientDemo2 {
+    public static void main(String[] args) throws IOException {
+        //创建一个Socket链接
+        Socket socket = new Socket(InetAddress.getByName(&quot;127.0.0.1&quot;), 9000);
+        //创建一个输出流
+        OutputStream os = socket.getOutputStream();
+        //读取文件
+        FileInputStream fis = new FileInputStream(new File(&quot;lol.png&quot;));
+        //写出文件
+        int len;
+        while ((len = fis.read()) != -1) {
+            os.write(len);
+        }
+        //关闭资源
+        fis.close();
+        os.close();
+        socket.close();
+    }
+}
+</code></pre>
+<!-- more -->
+<h1 id="udp">UDP</h1>
+<pre><code class="language-java">public class UdpServer {
+    public static void main(String[] args) throws Exception {
+        //开放端口
+        DatagramSocket socket = new DatagramSocket(8090);
+        //接受数据包
+        byte[] buffer = new byte[1024];
+        DatagramPacket packet = new DatagramPacket(buffer,0,buffer.length);
+        socket.receive(packet);
+        System.out.println(packet.getAddress().getHostAddress());
+        System.out.println(new String(packet.getData(),0,packet.getData().length));
+        //关闭连接
+        socket.close();
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class UdpClient {
+    public static void main(String[] args) throws Exception {
+        //建立一个socket
+        DatagramSocket socket = new DatagramSocket();
+        //建包
+        String msg = &quot;上善若水，水善利万物而不争！&quot;;
+        InetAddress IP = InetAddress.getByName(&quot;localhost&quot;);
+        int port = 8090;
+          //参数（数据，数据的起始、长度，发送的地址）
+        DatagramPacket packet = new DatagramPacket(msg.getBytes(),0,
+                msg.getBytes().length,IP,8090);
+        //发送包
+        socket.send(packet);
+        //关闭资源
+        socket.close();
+    }
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -85,7 +1867,7 @@
 <ul>
 <li>继承Thread类</li>
 </ul>
-<pre><code class="language-java">//创建线程方式一：继承Threa类
+<pre><code>//创建线程方式一：继承Threa类
 public class TestThread1 extends Thread {
     @Override
     public void run() {
@@ -587,38 +2369,6 @@ class MyThreads implements Runnable{
 8、方法重写具有相同的签名（方法名和参数列表）和返回值类型。<br>
 9、可以用@Override来标记方法重写。<br>
 10、方法重载可以重载同一个类中的方法，也可以重载继承父类的方法。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://1489368019.github.io/post/hello-gridea/</id>
-        <link href="https://1489368019.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>

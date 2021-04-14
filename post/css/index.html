@@ -1,0 +1,550 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CSS | Gridea</title>
+<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1618391143664">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="CSS | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="1、CSS简介
+Cascading Style Sheets（层叠样式表）
+CSS1.0
+CSS2.0 DⅣ(块) + CSS，HTML与CSS结构分离的思想，网页变得简单，SEO
+CSS2.1 浮动，定位
+CSS3.0 圆角，阴影，动画...." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://1489368019.github.io">
+  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1618391143664" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    上善若水
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              CSS
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-04-06
+              </span>
+              <span>
+                7 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="1-css简介">1、CSS简介</h1>
+<p>Cascading Style Sheets（层叠样式表）</p>
+<p>CSS1.0</p>
+<p>CSS2.0 DⅣ(块) + CSS，HTML与CSS结构分离的思想，网页变得简单，SEO</p>
+<p>CSS2.1 浮动，定位</p>
+<p>CSS3.0 圆角，阴影，动画....浏览器兼容性</p>
+<h1 id="2-css导入方式">2、CSS导入方式</h1>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+
+    &lt;!--内部样式--&gt;
+    &lt;style&gt;
+        h1 {
+            color: green;
+        }
+    &lt;/style&gt;
+
+    &lt;!--外部样式--&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;&gt;
+&lt;head&gt;
+&lt;body&gt;
+&lt;!--行内样式：在标签元素中，编写一个style属性--&gt;
+&lt;h1 style=&quot;color: red&quot;&gt;我是标题&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>优先级：<strong>就近原则</strong></p>
+<h1 id="3-基本选择器">3、基本选择器</h1>
+<ul>
+<li>
+<p>标签选择器</p>
+<pre><code class="language-css">/*标签选择器：会选择到页面上所有的这个标签的元素*/
+h1{
+    color: #118e42;
+}
+</code></pre>
+</li>
+<li>
+<p>类选择器</p>
+<pre><code class="language-css">/*类选择器
+格式：.class{}
+好处：可以多个标签归类，是同一个class，可以复用
+*/
+.title1{
+    color: #cbd709;
+}
+.title2{
+    color: #ba0f0f;
+}
+</code></pre>
+</li>
+<li>
+<p>id选择器</p>
+<pre><code class="language-css">/*id选择器
+格式：#id名{}
+id全局唯一
+*/
+#id1{
+    color: #ba0f0f;
+}
+</code></pre>
+</li>
+</ul>
+<p><strong>优先级：id选择器 &gt; 类选择器 &gt; 标签选择器</strong></p>
+<h1 id="4-层次选择器">4、层次选择器</h1>
+<ul>
+<li>
+<p>后代选择器：在某个元素后面所有</p>
+<pre><code class="language-css">/*后代选择器*/
+body p {
+    background: red;
+}
+</code></pre>
+</li>
+<li>
+<p>子选择器：一代</p>
+</li>
+<li>
+<pre><code class="language-css">/*子选择器*/
+body&gt;p {
+    background: yellow;
+}
+</code></pre>
+</li>
+<li>
+<p>相邻兄弟选择器：只有一个，向下相邻</p>
+<pre><code class="language-css">/*相邻兄弟选择器*/
+.active + p {
+    background: brown;
+}
+</code></pre>
+</li>
+<li>
+<p>通用选择器：当前选中元素向下的所有的兄弟元素</p>
+<pre><code class="language-c's's">/*通用选择器*/
+.active ~ p {
+    background: blue;
+}
+</code></pre>
+</li>
+</ul>
+<h1 id="5-结构伪类选择器">5、结构伪类选择器</h1>
+<p>伪类：条件</p>
+<pre><code class="language-css">/*ul的第一个子元素*/
+ul li:first-child{
+    background: green;
+}
+/*ul的最后一个元素*/
+ul li:last-child{
+    background: blue;
+}
+</code></pre>
+<pre><code class="language-css">/*选择当前p元素的父级元素,选中父级元素的第一个子元素,且是当前元素才生效 -顺序*/
+p:nth-child(2){
+    background: blueviolet;
+}
+/*选中父元素,下的p元素的第二个 -类型*/
+p:nth-of-type(2){
+    background: red;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1617715387134.png" alt="" loading="lazy"></figure>
+<h1 id="6-属性选择器">6、属性选择器</h1>
+<pre><code class="language-c's's">a[id=&quot;first&quot;]{
+    background: yellow;
+}
+</code></pre>
+<pre><code>= 绝对等于
+
+*= 包含这个元素
+
+^=  以这个开头
+
+$=   以这个结尾
+</code></pre>
+<h1 id="7-字体样式">7、字体样式</h1>
+<p>span标签：重点突出的字</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        #title1{
+            font-size: 50px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+欢迎学习&lt;span id=&quot;title1&quot;&gt;Java&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>font-family:   字体<br>
+font-size:       字体大小<br>
+font-weight:  字体粗细<br>
+color:              字体颜色</p>
+<h1 id="8-文本样式">8、文本样式</h1>
+<ul>
+<li>
+<p>text-align:center      --排版 ，居中</p>
+</li>
+<li>
+<p>text-indent:2em      --首行缩进2格</p>
+</li>
+<li>
+<p>height       块高</p>
+<p>line-height   行高</p>
+<p>行高 和 块高 一致时，就可以上下居中</p>
+</li>
+<li>
+<p>text-decoration:underline     --下划线</p>
+</li>
+<li>
+<p>color           颜色 （rgb，rgba）</p>
+</li>
+<li>
+<p>text-shadow:     阴影</p>
+</li>
+</ul>
+<h1 id="9-超链接伪类">9、超链接伪类</h1>
+<pre><code class="language-css">&lt;style&gt;
+/*默认的颜色*/
+a {
+    text-decoration: none;
+    color: #000;
+}
+/*鼠标悬浮的状态（只需要记住:hover) */
+a: hover {
+    color: orange;
+    font-size: 5Opx;
+}
+/*鼠标按住未释放的状态*/
+a : active {
+    color: green;
+}
+&lt; / style&gt;
+</code></pre>
+<h1 id="11-背景图像">11、背景图像</h1>
+<p>background-image：url(&quot;...&quot;) ;   默认是全部平铺</p>
+<p>background-repeat: repeat-x;</p>
+<p>background-repeat: repeat-y;</p>
+<p>background-repeat: no-repeat;</p>
+<p>/<em>数色，图片。终片位置,严铺方式</em>/<br>
+background: red ur1(&quot; ../images/d.gif&quot;) 270px 10px no-repeat;</p>
+<h1 id="12-盒子模型">12、盒子模型</h1>
+<h2 id="1-盒子模型">1、盒子模型</h2>
+<figure data-type="image" tabindex="2"><img src="https://1489368019.github.io/post-images/1617715762968.png" alt="" loading="lazy"></figure>
+<p>margin：外边距</p>
+<p>padding：内边距</p>
+<p>border：边框</p>
+<h2 id="2-边框">2、边框</h2>
+<p>1、边框的粗细</p>
+<p>2、边框的样式</p>
+<p>3、边框的颜色</p>
+<h1 id="13-圆角边框和阴影">13、圆角边框和阴影</h1>
+<pre><code class="language-css">&lt;style&gt;
+    div{
+        width: 100px;
+        height: 50px;
+        margin: 30px;
+        border: 1px solid red;
+        border-radius: 50px;
+    }
+&lt;/style&gt;
+</code></pre>
+<h1 id="14-display">14、display</h1>
+<pre><code class="language-css">&lt;style&gt;
+    /*block：块元素
+    inline：行内元素
+    inline-block：是块级元素，但可以内联在一行
+    */
+    div{
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        display: inline-block;
+    }
+    span{
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+        display: inline-block;
+    }
+&lt;/style&gt;
+</code></pre>
+<h1 id="15-浮动">15、浮动</h1>
+<h2 id="1-左右-浮动">1、左右 浮动</h2>
+<p>应用：可以让多个块级元素一行内排列显示</p>
+<p>float:left;</p>
+<p>float:right;</p>
+<h2 id="2-解决父级边框塌陷">2、解决父级边框塌陷</h2>
+<p><strong>1、增加父级元素的高度~</strong></p>
+<pre><code class="language-css">#father {
+		border: 1px #000 so7id;
+		height : 800px;
+}
+</code></pre>
+<p><strong>2、增加一个空的div标签，清除浮动</strong></p>
+<pre><code class="language-css">&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+
+.clear {
+   	clear: both;
+    margin: 0;
+   	padding: 0;
+}
+</code></pre>
+<p>3、<strong>overflow</strong></p>
+<pre><code>在父级元素中增加一个 overflow: hidden;
+</code></pre>
+<p><strong>4、父类添加一个伪类：after</strong></p>
+<pre><code class="language-css">#father:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+</code></pre>
+<h1 id="16-定位">16、定位</h1>
+<h2 id="1-相对定位">1、相对定位</h2>
+<p><strong>position: relative;</strong></p>
+<p>存在标准文档流</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        bady{
+            padding: 20px;
+        }
+        div{
+            margin: 10px;
+            padding: 5px;
+            font-size: 12px;
+            line-height: 25px;
+        }
+        #father {
+            border: 1px solid #666;
+            padding: 0;
+        }
+        #first {
+            background: #ee2d59;
+            border: 1px dashed black;
+            /*相对定位：上下左右*/
+            position: relative;
+            left: -20px;
+            top: 10px;
+        }
+        #second {
+            background: #2648c1;
+            border: 1px dashed black;
+        }
+        #third {
+            background: #d0dc26;
+            border: 1px dashed black;
+            position: relative;
+            right: -15px;
+            bottom: 15px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;father&quot;&gt;
+    &lt;div id=&quot;first&quot;&gt;第一个div&lt;/div&gt;
+    &lt;div id=&quot;second&quot;&gt;第二个div&lt;/div&gt;
+    &lt;div id=&quot;third&quot;&gt;第三个div&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="2-绝对定位">2、绝对定位</h2>
+<p><strong>position: absolute;</strong></p>
+<p>定位：基于xxx定位，上下左右</p>
+<ul>
+<li>没有父级元素定位的前提下，相对于浏览器定位</li>
+<li>假设父级元素存在定位，我们通常相对于父级元素进行偏移</li>
+<li>在父级元素范围内移动</li>
+<li>不存在标准文档流</li>
+</ul>
+<h2 id="3-固定定位">3、固定定位</h2>
+<p><strong>position: fixed;</strong></p>
+<p>不会随浏览器移动</p>
+<h2 id="4-z-index">4、z-index</h2>
+<p>图层</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#1-css%E7%AE%80%E4%BB%8B">1、CSS简介</a></li>
+<li><a href="#2-css%E5%AF%BC%E5%85%A5%E6%96%B9%E5%BC%8F">2、CSS导入方式</a></li>
+<li><a href="#3-%E5%9F%BA%E6%9C%AC%E9%80%89%E6%8B%A9%E5%99%A8">3、基本选择器</a></li>
+<li><a href="#4-%E5%B1%82%E6%AC%A1%E9%80%89%E6%8B%A9%E5%99%A8">4、层次选择器</a></li>
+<li><a href="#5-%E7%BB%93%E6%9E%84%E4%BC%AA%E7%B1%BB%E9%80%89%E6%8B%A9%E5%99%A8">5、结构伪类选择器</a></li>
+<li><a href="#6-%E5%B1%9E%E6%80%A7%E9%80%89%E6%8B%A9%E5%99%A8">6、属性选择器</a></li>
+<li><a href="#7-%E5%AD%97%E4%BD%93%E6%A0%B7%E5%BC%8F">7、字体样式</a></li>
+<li><a href="#8-%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F">8、文本样式</a></li>
+<li><a href="#9-%E8%B6%85%E9%93%BE%E6%8E%A5%E4%BC%AA%E7%B1%BB">9、超链接伪类</a></li>
+<li><a href="#11-%E8%83%8C%E6%99%AF%E5%9B%BE%E5%83%8F">11、背景图像</a></li>
+<li><a href="#12-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B">12、盒子模型</a>
+<ul>
+<li><a href="#1-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B">1、盒子模型</a></li>
+<li><a href="#2-%E8%BE%B9%E6%A1%86">2、边框</a></li>
+</ul>
+</li>
+<li><a href="#13-%E5%9C%86%E8%A7%92%E8%BE%B9%E6%A1%86%E5%92%8C%E9%98%B4%E5%BD%B1">13、圆角边框和阴影</a></li>
+<li><a href="#14-display">14、display</a></li>
+<li><a href="#15-%E6%B5%AE%E5%8A%A8">15、浮动</a>
+<ul>
+<li><a href="#1-%E5%B7%A6%E5%8F%B3-%E6%B5%AE%E5%8A%A8">1、左右 浮动</a></li>
+<li><a href="#2-%E8%A7%A3%E5%86%B3%E7%88%B6%E7%BA%A7%E8%BE%B9%E6%A1%86%E5%A1%8C%E9%99%B7">2、解决父级边框塌陷</a></li>
+</ul>
+</li>
+<li><a href="#16-%E5%AE%9A%E4%BD%8D">16、定位</a>
+<ul>
+<li><a href="#1-%E7%9B%B8%E5%AF%B9%E5%AE%9A%E4%BD%8D">1、相对定位</a></li>
+<li><a href="#2-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D">2、绝对定位</a></li>
+<li><a href="#3-%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D">3、固定定位</a></li>
+<li><a href="#4-z-index">4、z-index</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://1489368019.github.io/post/html/">
+              <h3 class="post-title">
+                HTMl
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://1489368019.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

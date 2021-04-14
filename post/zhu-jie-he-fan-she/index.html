@@ -2,23 +2,25 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Gridea</title>
+<title>注解和反射 | Gridea</title>
 <link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1618391143664">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="注解和反射 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
+    <meta name="description" content="注解
 
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
+作用
+
+不是程序本身，可以对程序作出解释
+可以被其他程序（如：编译器等）读取
+
+
+格式：以“@注释名”在代码中存在，还可以添加一些参数值
+例：@Override、@SuppressWarnings(value=&quot;unche..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -81,39 +83,89 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              注解和反射
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2021-03-27
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <h1 id="注解">注解</h1>
+<ul>
+<li>作用
+<ol>
+<li>不是程序本身，可以对程序作出解释</li>
+<li>可以被其他程序（如：编译器等）读取</li>
+</ol>
+</li>
+<li>格式：以“@注释名”在代码中存在，还可以添加一些参数值<br>
+例：@Override、@SuppressWarnings(value=&quot;unchecked&quot;)</li>
+<li>自定义注解</li>
+</ul>
+<pre><code class="language-java">//自定义注解
+public class TestAnnotation {
+    //如果没有默认值，就必须给注解赋值
+    @MyAnnotation01(age = 1)
+    public void test01() {
+    }
+}
+
+//元注解
+//@Target 用于描述注解的使用范围
+@Target({ElementType.TYPE, ElementType.METHOD})
+//@Retention 用于描述注解的生命周期（SOURCE&lt;CLASS&lt;RUNTIME）
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation01 {
+    //注解的参数：参数类型 + 参数名();
+    //default 默认值
+    String value() default &quot;&quot;;
+    int age();
+    int id() default -1;
+    String[] schools() default {&quot;哈士奇&quot;, &quot;泰迪&quot;};
+}
+</code></pre>
+<!-- more -->
+<h1 id="反射">反射</h1>
+<ul>
+<li>得到Class类的方法
+<ol>
+<li>直接通过一个class的静态变量class获取：<br>
+Class cls = String.class;</li>
+<li>如果我们有一个实例变量，可以通过该实例变量提供的getClass()方法获取：<br>
+String s = &quot;Hello&quot;;<br>
+Class cls = s.getClass();</li>
+<li>如果知道一个class的完整类名，可以通过静态方法Class.forName()获取：<br>
+Class cls = Class.forName(&quot;java.lang.String&quot;);</li>
+</ol>
+</li>
+<li>调用构造方法<br>
+getConstructor(Class...)：获取某个public的Constructor<br>
+getDeclaredConstructor(Class...)：获取某个private和public的Constructor<br>
+getConstructors()：获取所有public的Constructor</li>
+<li>调用方法<br>
+Method getMethod(name, Class...)：获取某个public的Method（包括父类）<br>
+Method getDeclaredMethod(name, Class...)：获取当前类的某个Method（不包括父类）<br>
+Method[] getMethods()：获取所有public的Method（包括父类）<br>
+Method[] getDeclaredMethods()：获取当前类的所有Method（不包括父类）</li>
+<li>访问字段<br>
+Field getField(name)：根据字段名获取某个public的field（包括父类）<br>
+Field getDeclaredField(name)：根据字段名获取当前类的某个field（不包括父类）<br>
+Field[] getFields()：获取所有public的field（包括父类）<br>
+Field[] getDeclaredFields()：获取当前类的所有field（不包括父类）</li>
+</ul>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
+<li><a href="#%E6%B3%A8%E8%A7%A3">注解</a></li>
+<li><a href="#%E5%8F%8D%E5%B0%84">反射</a></li>
 </ul>
 
               </div>
@@ -121,6 +173,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://1489368019.github.io/post/wang-luo-bian-cheng/">
+              <h3 class="post-title">
+                网络编程
+              </h3>
+            </a>
+          </div>
         
 
         

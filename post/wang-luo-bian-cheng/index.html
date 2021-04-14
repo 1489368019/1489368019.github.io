@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>网络编程 | Gridea</title>
-<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1616593498085">
+<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1618391143664">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="网络编程 | Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
@@ -26,7 +26,7 @@ IP地址分为IPv4和IPv6两种，有一个特殊的IP地址，称为本机地�
       <div class="main-content">
         <div class="site-header">
   <a href="https://1489368019.github.io">
-  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1616593498085" alt="">
+  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1618391143664" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -86,7 +86,7 @@ IP地址分为IPv4和IPv6两种，有一个特殊的IP地址，称为本机地�
                 2021-03-24
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
               
             </div>
@@ -122,8 +122,90 @@ IP地址分为IPv4和IPv6两种，有一个特殊的IP地址，称为本机地�
 <!-- more -->
 <h1 id="tcp">TCP</h1>
 <ul>
-<li></li>
+<li>服务器端：用ServerSocket监听指定端口</li>
 </ul>
+<pre><code class="language-java">//服务器端
+public class TcpServerDemo2 {
+    public static void main(String[] args) throws IOException {
+        //创建服务
+        ServerSocket serverSocket = new ServerSocket(9000);
+        //监听客户端的链接
+        Socket socket = serverSocket.accept();
+        //读取文件
+        InputStream is = socket.getInputStream();
+        //写出文件
+        FileOutputStream fos = new FileOutputStream(&quot;receive.png&quot;);
+        int len;
+        while ((len = is.read()) != -1) {
+            fos.write(len);
+        }
+        //关闭资源
+        fos.close();
+        is.close();
+        socket.close();
+        serverSocket.close();
+    }
+}
+</code></pre>
+<ul>
+<li>客户端 ：用Socket(InetAddress, port)连接服务器</li>
+</ul>
+<pre><code class="language-java">//客户端
+public class TcpClientDemo2 {
+    public static void main(String[] args) throws IOException {
+        //创建一个Socket链接
+        Socket socket = new Socket(InetAddress.getByName(&quot;127.0.0.1&quot;), 9000);
+        //创建一个输出流
+        OutputStream os = socket.getOutputStream();
+        //读取文件
+        FileInputStream fis = new FileInputStream(new File(&quot;lol.png&quot;));
+        //写出文件
+        int len;
+        while ((len = fis.read()) != -1) {
+            os.write(len);
+        }
+        //关闭资源
+        fis.close();
+        os.close();
+        socket.close();
+    }
+}
+</code></pre>
+<!-- more -->
+<h1 id="udp">UDP</h1>
+<pre><code class="language-java">public class UdpServer {
+    public static void main(String[] args) throws Exception {
+        //开放端口
+        DatagramSocket socket = new DatagramSocket(8090);
+        //接受数据包
+        byte[] buffer = new byte[1024];
+        DatagramPacket packet = new DatagramPacket(buffer,0,buffer.length);
+        socket.receive(packet);
+        System.out.println(packet.getAddress().getHostAddress());
+        System.out.println(new String(packet.getData(),0,packet.getData().length));
+        //关闭连接
+        socket.close();
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class UdpClient {
+    public static void main(String[] args) throws Exception {
+        //建立一个socket
+        DatagramSocket socket = new DatagramSocket();
+        //建包
+        String msg = &quot;上善若水，水善利万物而不争！&quot;;
+        InetAddress IP = InetAddress.getByName(&quot;localhost&quot;);
+        int port = 8090;
+          //参数（数据，数据的起始、长度，发送的地址）
+        DatagramPacket packet = new DatagramPacket(msg.getBytes(),0,
+                msg.getBytes().length,IP,8090);
+        //发送包
+        socket.send(packet);
+        //关闭资源
+        socket.close();
+    }
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
@@ -131,6 +213,7 @@ IP地址分为IPv4和IPv6两种，有一个特殊的IP地址，称为本机地�
 <li><a href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86">基本知识</a></li>
 <li><a href="#%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E7%9A%84%E8%A6%81%E7%B4%A0">网络通信的要素</a></li>
 <li><a href="#tcp">TCP</a></li>
+<li><a href="#udp">UDP</a></li>
 </ul>
 
               </div>

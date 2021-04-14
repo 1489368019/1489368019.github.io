@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gridea</title>
-<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1616593498085">
+<link rel="shortcut icon" href="https://1489368019.github.io/favicon.ico?v=1618391143664">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://1489368019.github.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Gridea - Atom Feed" href="https://1489368019.github.io/atom.xml">
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://1489368019.github.io">
-  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1616593498085" alt="">
+  <img class="avatar" src="https://1489368019.github.io/images/avatar.png?v=1618391143664" alt="">
   </a>
   <h1 class="site-title">
     Gridea
@@ -72,6 +72,167 @@
         <div class="post-container">
   
     <article class="post">
+      <a href="https://1489368019.github.io/post/javascript/">
+        <h2 class="post-title">JavaScript</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2021-04-14
+        </span>
+        <span>
+          19 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://1489368019.github.io/post/css/">
+        <h2 class="post-title">CSS</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2021-04-06
+        </span>
+        <span>
+          7 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://1489368019.github.io/post/html/">
+        <h2 class="post-title">HTMl</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2021-04-02
+        </span>
+        <span>
+          11 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://1489368019.github.io/post/shu-ju-ku-qu-dong-bao-xia-zai/">
+        <h2 class="post-title">数据库驱动包下载</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2021-04-01
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://1489368019.github.io/post/mysql/">
+        <h2 class="post-title">MySQL</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2021-03-28
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        <h1 id="操作数据库">操作数据库</h1>
+<p>操作数据库 &gt; 操作表 &gt; 操作表中的数据<br>
+mysql关键字不区分大小写</p>
+<ul>
+<li>操作数据库
+<ol>
+<li>创建数据库：CREATE DATABASE [IF NOT EXISTS] westos</li>
+<li>删除数据库：DROP DATABASE IF EXISTS westos</li>
+</ol>
+</li>
+</ul>
+<h1 id="数据库引擎">数据库引擎</h1>
+<figure data-type="image" tabindex="1"><img src="https://1489368019.github.io/post-images/1616977369581.png" alt="" loading="lazy"></figure>
+
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://1489368019.github.io/post/zhu-jie-he-fan-she/">
+        <h2 class="post-title">注解和反射</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2021-03-27
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        <h1 id="注解">注解</h1>
+<ul>
+<li>作用
+<ol>
+<li>不是程序本身，可以对程序作出解释</li>
+<li>可以被其他程序（如：编译器等）读取</li>
+</ol>
+</li>
+<li>格式：以“@注释名”在代码中存在，还可以添加一些参数值<br>
+例：@Override、@SuppressWarnings(value=&quot;unchecked&quot;)</li>
+<li>自定义注解</li>
+</ul>
+<pre><code class="language-java">//自定义注解
+public class TestAnnotation {
+    //如果没有默认值，就必须给注解赋值
+    @MyAnnotation01(age = 1)
+    public void test01() {
+    }
+}
+
+//元注解
+//@Target 用于描述注解的使用范围
+@Target({ElementType.TYPE, ElementType.METHOD})
+//@Retention 用于描述注解的生命周期（SOURCE&lt;CLASS&lt;RUNTIME）
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation01 {
+    //注解的参数：参数类型 + 参数名();
+    //default 默认值
+    String value() default &quot;&quot;;
+    int age();
+    int id() default -1;
+    String[] schools() default {&quot;哈士奇&quot;, &quot;泰迪&quot;};
+}
+</code></pre>
+
+      </div>
+    </article>
+  
+    <article class="post">
       <a href="https://1489368019.github.io/post/wang-luo-bian-cheng/">
         <h2 class="post-title">网络编程</h2>
       </a>
@@ -80,7 +241,7 @@
           2021-03-24
         </span>
         <span>
-          1 min read
+          3 min read
         </span>
         
       </div>
@@ -157,39 +318,13 @@
       </div>
     </article>
   
-    <article class="post">
-      <a href="https://1489368019.github.io/post/hello-gridea/">
-        <h2 class="post-title">Hello Gridea</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2018-12-12
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://1489368019.github.io/tag/ZyptsBcOV/" class="post-tag">
-            # Gridea
-          </a>
-        
-      </div>
-      
-        <a href="https://1489368019.github.io/post/hello-gridea/" class="post-feature-image" style="background-image: url('https://1489368019.github.io/post-images/hello-gridea.png')">
-        </a>
-      
-      <div class="post-abstract">
-        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-      </div>
-    </article>
-  
 </div>
 
     
         <div class="pagination-container">
   
+  
+    <a href="https://1489368019.github.io/page/2" class="next-page">下一页</a>
   
 </div>
 
